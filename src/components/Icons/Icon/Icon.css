@@ -1,0 +1,19 @@
+.icon {
+  color: inherit;
+}
+
+.icon--color-primary {
+  color: black;
+}
+
+.icon--color-secondary {
+  color: #afadb5;
+}
+
+.icon--color-accent {
+  color: violet;
+}
+
+.icon--color-brand {
+  color: #b5460f;
+}

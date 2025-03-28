@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.recipeList {
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px 80px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=RecipeListPage.module.css.map */

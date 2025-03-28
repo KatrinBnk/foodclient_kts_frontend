@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "composite": true,
+    "emitDeclarationOnly": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -12,7 +14,6 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -20,7 +21,22 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* React */
+    "jsxImportSource": "react",
+
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@utils/*": ["src/utils/*"],
+      "@configs/*": ["src/configs/*"],
+      "@types/*": ["src/types/*"],
+      "@components/*": ["src/components/*"]
+    }
+
   },
-  "include": ["src"]
+  "include": ["src", "vite.config.ts"],
+  "exclude": ["node_modules"]
 }

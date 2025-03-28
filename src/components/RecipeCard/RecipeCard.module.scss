@@ -1,0 +1,110 @@
+@use 'sass:color';
+@import '@styles/variables';
+
+.card {
+  width: 360px;
+  height: 578px;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    background-color: rgba($background-color, 0.6);
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 360px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 24px 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  display: flex;
+  align-items: center;
+  font-size: $font-size-time;
+  line-height: $line-height-time;
+  color: $primary-text-color;
+  opacity: 0.7;
+  margin-bottom: 8px;
+}
+
+.timeIcon {
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+.title {
+  font-size: $font-size-title;
+  line-height: $line-height-title;
+  color: $primary-text-color;
+  font-weight: 600;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ingredients {
+  font-size: $font-size-ingredients;
+  line-height: $line-height-ingredients;
+  color: $primary-text-color;
+  opacity: 0.8;
+  margin: 0 0 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.calories {
+  font-size: $font-size-calories;
+  line-height: $line-height-calories;
+  color: $secondary-color;
+  font-weight: 600;
+}
+
+.saveButton {
+  background-color: $secondary-color;
+  color: #fff;
+  border: none;
+  border-radius: $border-radius;
+  min-height: 52px;
+  padding: 17px 20px;
+  font-size: $font-size-button;
+  line-height: $line-height-button;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($secondary-color, 0.8);
+  }
+}

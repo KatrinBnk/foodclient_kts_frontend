@@ -1,0 +1,12 @@
+@import '@styles/variables.scss';
+
+.RecipeDetailPage {
+  max-width: 1240px;
+  padding: 0 20px;
+  width: 100%;
+  margin: 49px auto 0;
+
+  &__main {
+    margin-top: 37px;
+  }
+}
