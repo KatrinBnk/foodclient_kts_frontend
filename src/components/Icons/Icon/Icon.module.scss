@@ -1,0 +1,21 @@
+@import "@styles/variables";
+
+.icon {
+  color: inherit;
+}
+
+.icon--color-primary {
+  color: $text-primary-color;
+}
+
+.icon--color-secondary {
+  color: $secondary-color;
+}
+
+.icon--color-accent {
+  color: $accent-color;
+}
+
+.icon--color-brand {
+  color: $brand-color;
+}
