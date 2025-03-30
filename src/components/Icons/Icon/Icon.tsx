@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import './Icon.css';
+import styles from './Icon.module.scss';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
@@ -15,7 +15,13 @@ const Icon: React.FC<IconProps> = ({
   children,
   ...props
 }) => {
-  const iconClass = classNames('icon', { [`icon--color-${color}`]: color }, className);
+  const iconClass = classNames(
+    styles.icon,
+    {
+      [styles[`icon--color-${color}`]]: color,
+    },
+    className
+  );
   const viewBox = `0 0 ${width} ${height}`;
 
   return (
