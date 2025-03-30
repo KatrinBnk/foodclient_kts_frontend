@@ -1,10 +1,10 @@
 import React from 'react';
-import { DetailedRecipe } from '@/types';
+import { ShortRecipe } from '@/types';
 import RecipeCard from '@components/RecipeCard/RecipeCard';
 import styles from './RecipeList.module.scss';
 
 interface RecipeListProps {
-  recipes: DetailedRecipe[];
+  recipes: ShortRecipe[];
   onSave: (documentId: string) => void;
   onCardClick: (documentId: string) => void;
 }

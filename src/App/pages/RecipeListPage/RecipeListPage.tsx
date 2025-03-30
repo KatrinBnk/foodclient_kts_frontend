@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { getRecipes } from '@utils/api';
 import styles from './RecipeListPage.module.scss';
 import RecipeList from '@components/RecipeList/RecipeList';
-import { ApiResponse, Recipe } from '@/types';
+import { ApiResponse, ShortRecipe } from '@/types';
 import Poster from '/assets/poster.png';
 
 const RecipeListPage: React.FC = () => {
   const navigate = useNavigate();
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [recipes, setRecipes] = useState<ShortRecipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response: ApiResponse<Recipe[]> = await getRecipes();
+        const response: ApiResponse<ShortRecipe[]> = await getRecipes();
         setRecipes(response.data);
         setLoading(false);
       } catch (err) {
