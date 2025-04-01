@@ -1,33 +1,43 @@
-//TODO: скорее всего настакала дубликатов, надо будет проверить
+// Цвета
+$brand-color: #B5460F; //+
+$brand-active-color: #872D01; //+
+$secondary-color: #AFADB5; //+
+$bg-primary-color: #fff; //+
+$accent-color: #f5f5f5; //+
 
-$primary-color: #333;
-$secondary-color: #b5460f;
-$accent-color: #f5f5f5;
-$brand-color: #b5460f;
-$background-color: #fff5e6;
-$ingridients-color: #afadb5;
-$border-radius: 8px;
-$spacing: 16px;
-$font-size-small: 14px;
-$font-size-medium: 16px;
-$font-size-large: 20px;
+$gap-xxs: 8px; //+
+$border-radius: 8px; //+
 
-$text-primary-color: #000000;
 
-$background-color: #fff;
-$primary-text-color: #333;
-$secondary-color: #b5460f;
-$border-radius: 10px;
-$spacing: 16px;
+// Button
+$button-height: 52px; //+
+$button-padding-vertical: 14px; //+
+$button-padding-horizontal: 20px; //+
+$button-gap: $gap-xxs; //+
 
-$font-size-time: 14px;
-$font-size-title: 20px;
-$font-size-ingredients: 16px;
-$font-size-calories: 18px;
-$font-size-button: 18px;
+// Button
+$button-bg-primary: $brand-color; //+
+$button-bg-hover: rgba($brand-color, 0.7); //+
+$button-bg-active: $brand-active-color; //+
+$button-bg-disabled: #D9D9D9; //+
 
-$line-height-time: 18px;
-$line-height-title: 24px;
-$line-height-ingredients: 20px;
-$line-height-calories: 22px;
-$line-height-button: 18px;
+// Text
+$text-primary-color: #000000; //+
+$text-secondary-color: #AFADB5; //+
+$text-accent-color: $brand-color; //+
+$text-button-color: #FFFFFF; //+
+
+// Loader
+$loader-size-s: 24px; //+
+$loader-size-m: 48px; //+
+$loader-size-l: 60px; //+
+
+// Header +
+
+// Card
+$card-height: 600px; //+
+$card-width: 360px; //+
+$card-bg-color: $bg-primary-color; //+
+
+// Summary
+$summary-bg: rgba(#b5460f54, 0.33);
