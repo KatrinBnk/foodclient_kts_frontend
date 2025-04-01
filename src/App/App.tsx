@@ -6,7 +6,7 @@ import MainLayout from '@components/Layouts/MainLayout';
 
 // TODO: скорее всего поменять BrouserRouter на HashRouter (если нужно будет деплоить на gh-pages) и разнести нормально
 
-function App() {
+const App = () => {
   return (
     <Router>
       <Routes>
