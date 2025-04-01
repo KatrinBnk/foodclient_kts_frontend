@@ -1,6 +1,6 @@
-@import '@styles/variables.scss';
+@use "@styles/variables" as *;
 
-.foodInfo {
+.food-info {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,7 +15,7 @@
   }
 }
 
-.list {
+.food-info__list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: min-content;
@@ -23,7 +23,7 @@
   align-items: start;
 }
 
-.item {
+.food-info__item {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -39,20 +39,4 @@
   &[style*='grid-column: 3'] {
     justify-self: end;
   }
-}
-
-.label {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: $text-primary-color;
-}
-
-.data {
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0%;
-  color: $secondary-color;
 }

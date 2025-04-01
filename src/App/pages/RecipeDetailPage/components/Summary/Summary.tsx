@@ -1,75 +1,46 @@
 import React from 'react';
 import styles from './Summary.module.scss';
+import parse from 'html-react-parser';
+import Text from '@components/Text';
 
 interface SummaryProps {
   text: string;
 }
 
-//TODO: попытки обработать если всречен html внутри summary
-const parseSimpleHtml = (text: string): React.ReactNode[] => {
-  // Разбиваем текст на параграфы
-  return text
-    .split('</p>')
-    .map((paragraph, index) => {
-      const cleanParagraph = paragraph.replace('<p>', '').trim();
-      if (!cleanParagraph) return null;
-
-      // Обрабатываем текст внутри параграфа
-      const processText = (content: string): React.ReactNode[] => {
-        // Сначала ищем ссылки
-        const parts: React.ReactNode[] = [];
-        const linkRegex = /<a\s+href="([^"]+)"[^>]*>([^<]+)<\/a>/g;
-        let lastIndex = 0;
-        let match;
-
-        while ((match = linkRegex.exec(content)) !== null) {
-          // Добавляем текст до ссылки
-          if (match.index > lastIndex) {
-            const textBeforeLink = content.slice(lastIndex, match.index);
-            // Обрабатываем жирный текст в части до ссылки
-            parts.push(...processBoldText(textBeforeLink));
-          }
-
-          // Добавляем ссылку
-          parts.push(
-            <a
-              key={`link-${match.index}`}
-              href={match[1]}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.link}
-            >
-              {match[2]}
-            </a>
-          );
-
-          lastIndex = linkRegex.lastIndex;
-        }
-
-        // Добавляем оставшийся текст после последней ссылки
-        if (lastIndex < content.length) {
-          const remainingText = content.slice(lastIndex);
-          parts.push(...processBoldText(remainingText));
-        }
-
-        return parts;
-      };
-
-      // Обработка жирного текста
-      const processBoldText = (text: string): React.ReactNode[] => {
-        const boldParts = text.split(/<\/?b>/);
-        return boldParts.map((part, boldIndex) => {
-          return boldIndex % 2 === 1 ? <strong key={`bold-${boldIndex}`}>{part}</strong> : part;
-        });
-      };
-
-      return <p key={`p-${index}`}>{processText(cleanParagraph)}</p>;
-    })
-    .filter(Boolean);
-};
-
 const Summary: React.FC<SummaryProps> = ({ text }) => {
-  return <div className={styles.summary}>{parseSimpleHtml(text)}</div>;
+  const options = {
+    replace: (domNode: any) => {
+      if (domNode.name === 'p') {
+        return (
+          <Text view="p-16" className={styles.paragraph}>
+            {domNode.children.map((child: any, index: number) => {
+              if (child.type === 'text') {
+                return child.data;
+              }
+              if (child.name === 'a') {
+                return (
+                  <Text key={index} view="link" tag="a" color="primary" href={child.attribs.href}>
+                    {child.children[0].data}
+                  </Text>
+                );
+              }
+              if (child.name === 'b') {
+                return (
+                  <Text key={index} view="p-16" weight="bold">
+                    {child.children[0].data}
+                  </Text>
+                );
+              }
+              return child;
+            })}
+          </Text>
+        );
+      }
+      return domNode;
+    },
+  };
+
+  return <div className={styles.summary}>{parse(text, options)}</div>;
 };
 
 export default Summary;

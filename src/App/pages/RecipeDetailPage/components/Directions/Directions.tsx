@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Directions.module.scss';
 import { Direction } from '@/types';
+import Text from '@components/Text';
 
 interface DirectionsProps {
   directions: Direction[];
@@ -8,13 +9,19 @@ interface DirectionsProps {
 
 const Directions: React.FC<DirectionsProps> = ({ directions }) => {
   return (
-    <div className={styles.directions}>
-      <h2 className={styles.directions__title}>Directions</h2>
-      <div className={styles.directions__list}>
+    <div className={styles['directions']}>
+      <Text view="p-20" tag="h2" weight="bold" className={styles['directions__title']}>
+        Directions
+      </Text>
+      <div className={styles['directions__list']}>
         {directions.map((direction, index) => (
-          <div key={direction.id} className={styles.directions__step}>
-            <span className={styles.directions__step__number}>Step {index + 1}</span>
-            <p className={styles.directions__step__description}>{direction.description}</p>
+          <div key={direction.id} className={styles['directions__step']}>
+            <Text view="p-16" weight="bold" className={styles['directions__step__number']}>
+              Step {index + 1}
+            </Text>
+            <Text view="p-14" className={styles['directions__step__description']}>
+              {direction.description}
+            </Text>
           </div>
         ))}
       </div>

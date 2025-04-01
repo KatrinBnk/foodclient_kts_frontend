@@ -44,4 +44,4 @@ export const getFoodInfo = (recipe: DetailedRecipe): FoodInfo[] => [
     gridColumn: 3,
     gridRow: 2,
   },
-]; 
+];

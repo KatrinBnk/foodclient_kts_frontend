@@ -1,14 +1,7 @@
-@import '@styles/variables.scss';
+@use "@styles/variables" as *;
 
 .directions {
-  margin: 48px 0;
-
   &__title {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: 0;
-    color: $text-primary-color;
     margin-bottom: 24px;
   }
 
@@ -22,19 +15,5 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-
-    &__number {
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 20px;
-      letter-spacing: 0;
-    }
-
-    &__description {
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 18px;
-      letter-spacing: 0;
-    }
   }
 }

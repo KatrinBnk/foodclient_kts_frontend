@@ -1,26 +1,8 @@
-@import '@styles/variables.scss';
+@use "@styles/variables" as *;
 
 .summary {
-  background: rgba(#b5460f54, 0.33);
+  background: $summary-bg;
   padding: 36px;
   border-radius: $border-radius;
-  font-weight: 400;
-  font-size: 16px;
   line-height: 20px;
-  margin: 48px 0;
-}
-
-p {
-  margin: 0;
-}
-
-.link {
-  text-decoration: underline;
-  color: $text-primary-color;
-  font-weight: 500;
-  transition: color 0.2s ease;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
