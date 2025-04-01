@@ -5,26 +5,25 @@ export interface MenuItem {
   title: string;
 }
 
-//NOTE: надо будет заменить на использование маршрутов из конфига
 export const menuItems: MenuItem[] = [
   {
     link: ROUTES.RECIPE_LIST,
     title: 'Recipes',
   },
   {
-    link: '/categories',
+    link: ROUTES.MEAL_CATEGORIES,
     title: 'Meals Categories',
   },
   {
-    link: '/products',
+    link: ROUTES.PRODUCTS,
     title: 'Products',
   },
   {
-    link: '/menu_item',
+    link: ROUTES.MENU_ITEMS,
     title: 'Menu Items',
   },
   {
-    link: '/planning',
+    link: ROUTES.MEAL_PLANNING,
     title: 'Meal Planning',
   },
 ]; 
