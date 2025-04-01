@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRecipes } from '@utils/api';
 import styles from './RecipeListPage.module.scss';
-import RecipeList from '@components/RecipeList/RecipeList';
+import RecipeList from './components/RecipeList';
 import { ApiResponse, ShortRecipe } from '@/types';
 import Poster from '/assets/poster.png';
 
@@ -11,9 +11,13 @@ const RecipeListPage: React.FC = () => {
   const [recipes, setRecipes] = useState<ShortRecipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const isMounted = useRef(false);
 
   useEffect(() => {
     const fetchRecipes = async () => {
+      if (isMounted.current) return;
+      isMounted.current = true;
+
       try {
         const response: ApiResponse<ShortRecipe[]> = await getRecipes();
         setRecipes(response.data);
@@ -37,20 +41,24 @@ const RecipeListPage: React.FC = () => {
     navigate(`/recipe/${documentId}`);
   };
 
-  if (loading) return <div className={styles.container}>Загрузка...</div>;
-  if (error) return <div className={styles.container}>{error}</div>;
+  if (loading) return <div className={styles['recipe-list-page__container']}>Загрузка...</div>;
+  if (error) return <div className={styles['recipe-list-page__container']}>{error}</div>;
 
   return (
     <>
-      <div className={styles.poster}>
+      <div className={styles['recipe-list-page__poster']}>
         <img src={Poster} alt="Recipes banner" />
-        <div className={styles.poster__overlay}>
+        <div className={styles['recipe-list-page__poster-overlay']}>
           Find the perfect food and <a>drink ideas</a> for every occasion, from{' '}
           <a>weeknight dinners</a> to <a>holiday feasts</a>.
         </div>
       </div>
-      <div className={styles.container}>
-        <RecipeList recipes={recipes} onSave={handleSave} onCardClick={handleCardClick} />
+      <div className={styles['recipe-list-page__container']}>
+        <RecipeList
+          recipes={recipes}
+          onSave={handleSave}
+          onCardClick={handleCardClick}
+        />
       </div>
     </>
   );

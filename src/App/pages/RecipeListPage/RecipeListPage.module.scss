@@ -1,4 +1,6 @@
-.container {
+@use "@styles/variables" as *;
+
+.recipe-list-page__container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -6,15 +8,7 @@
   padding: 64px 0;
 }
 
-.recipeList {
-  max-width: 1240px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 64px 80px;
-  width: 100%;
-}
-
-.poster {
+.recipe-list-page__poster {
   position: relative;
   width: 100%;
 
@@ -24,18 +18,18 @@
     object-fit: cover;
   }
 
-  &__overlay {
+  &-overlay {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     letter-spacing: 0;
     text-align: center;
-    color: #000;
+    color: $text-primary-color;
     width: 100%;
     margin: 36px auto 0;
 
     a {
-      color: #000;
+      color: $text-primary-color;
       text-decoration: underline;
 
       &:hover {

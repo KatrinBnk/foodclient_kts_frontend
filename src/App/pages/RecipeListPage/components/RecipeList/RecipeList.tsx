@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShortRecipe } from '@/types';
-import RecipeCard from '@components/RecipeCard/RecipeCard';
+import RecipeCard from '../RecipeCard';
 import styles from './RecipeList.module.scss';
 
 interface RecipeListProps {
@@ -11,7 +11,7 @@ interface RecipeListProps {
 
 const RecipeList: React.FC<RecipeListProps> = ({ recipes, onSave, onCardClick }) => {
   return (
-    <div className={styles.recipeList}>
+    <div className={styles['recipe-list']}>
       {recipes.map((recipe) => (
         <RecipeCard
           key={recipe.documentId}
