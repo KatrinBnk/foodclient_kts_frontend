@@ -18,7 +18,9 @@ const Header: React.FC = () => {
     <div className={styles['header']}>
       <Link to="/" className={styles['header__logo']}>
         <img src={logo} />
-        <Text tag="h1" view="p-20" weight="bold" className='header__logo-title'>Food Client</Text>
+        <Text tag="h1" view="p-20" weight="bold" className="header__logo-title">
+          Food Client
+        </Text>
       </Link>
       <nav className={styles['header__nav']}>
         {menuItems.map((item: MenuItem) => (

@@ -18,4 +18,3 @@ export const getRecipeById = async (documentId: string) => {
   const response = await axios.get(url);
   return response.data;
 };
-

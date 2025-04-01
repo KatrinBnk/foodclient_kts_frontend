@@ -11,26 +11,16 @@ export type LoaderProps = {
   color?: string;
 };
 
-export const Loader: React.FC<LoaderProps> = ({
-                                                size = 'l',
-                                                className,
-                                                color
-                                              }) => {
+export const Loader: React.FC<LoaderProps> = ({ size = 'l', className, color }) => {
   const loaderClasses = classNames(
     styles['loader'], // Блок
     styles[`loader--size-${size}`], // Модификатор (например, loader--size-s)
     className
   );
 
-  const style = color ? { '--color-loader': color } as React.CSSProperties : undefined;
+  const style = color ? ({ '--color-loader': color } as React.CSSProperties) : undefined;
 
-  return (
-    <div
-      className={loaderClasses}
-      style={style}
-      data-testid="loader"
-    />
-  );
+  return <div className={loaderClasses} style={style} data-testid="loader" />;
 };
 
 export default Loader;

@@ -44,9 +44,9 @@ const RecipeDetailPage: React.FC = () => {
 
   if (loading) return <div className={styles['recipe-detail-page__container']}>Загрузка...</div>;
   if (error || !recipe)
-    return <div className={styles['recipe-detail-page__container']}>
-      {error || 'Рецепт не найден'}
-    </div>;
+    return (
+      <div className={styles['recipe-detail-page__container']}>{error || 'Рецепт не найден'}</div>
+    );
 
   const foodInfo = getFoodInfo(recipe);
 

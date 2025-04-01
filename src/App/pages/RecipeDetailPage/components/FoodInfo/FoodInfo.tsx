@@ -32,12 +32,7 @@ const FoodInfo: React.FC<FoodInfoProps> = ({ imageUrl, imageAlt, info }) => {
             <Text view="p-16" color="primary" className={styles['food-info__label']}>
               {item.label}
             </Text>
-            <Text
-              view="p-16"
-              weight="medium"
-              color="accent"
-              className={styles['food-info__data']}
-            >
+            <Text view="p-16" weight="medium" color="accent" className={styles['food-info__data']}>
               {item.data}
             </Text>
           </div>

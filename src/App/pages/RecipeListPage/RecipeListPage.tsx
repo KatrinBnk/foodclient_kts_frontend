@@ -54,11 +54,7 @@ const RecipeListPage: React.FC = () => {
         </div>
       </div>
       <div className={styles['recipe-list-page__container']}>
-        <RecipeList
-          recipes={recipes}
-          onSave={handleSave}
-          onCardClick={handleCardClick}
-        />
+        <RecipeList recipes={recipes} onSave={handleSave} onCardClick={handleCardClick} />
       </div>
     </>
   );

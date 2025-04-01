@@ -1,13 +1,12 @@
 // Цвета
-$brand-color: #B5460F; //+
-$brand-active-color: #872D01; //+
-$secondary-color: #AFADB5; //+
+$brand-color: #b5460f; //+
+$brand-active-color: #872d01; //+
+$secondary-color: #afadb5; //+
 $bg-primary-color: #fff; //+
 $accent-color: #f5f5f5; //+
 
 $gap-xxs: 8px; //+
 $border-radius: 8px; //+
-
 
 // Button
 $button-height: 52px; //+
@@ -19,13 +18,13 @@ $button-gap: $gap-xxs; //+
 $button-bg-primary: $brand-color; //+
 $button-bg-hover: rgba($brand-color, 0.7); //+
 $button-bg-active: $brand-active-color; //+
-$button-bg-disabled: #D9D9D9; //+
+$button-bg-disabled: #d9d9d9; //+
 
 // Text
 $text-primary-color: #000000; //+
-$text-secondary-color: #AFADB5; //+
+$text-secondary-color: #afadb5; //+
 $text-accent-color: $brand-color; //+
-$text-button-color: #FFFFFF; //+
+$text-button-color: #ffffff; //+
 
 // Loader
 $loader-size-s: 24px; //+

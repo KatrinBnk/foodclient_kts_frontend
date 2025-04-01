@@ -16,7 +16,6 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onSave, onCardClick }) 
     ? recipe.ingradients.map((item) => item.name).join(' + ')
     : 'Ingredients not specified';
 
-
   return (
     <Card
       className={styles['recipe-card']}
@@ -34,9 +33,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onSave, onCardClick }) 
       title={recipe.name}
       subtitle={ingredients}
       contentSlot={
-        <span className={styles['recipe-card__calories']}>
-          {Math.round(recipe.calories)} kcal
-        </span>
+        <span className={styles['recipe-card__calories']}>{Math.round(recipe.calories)} kcal</span>
       }
       actionSlot={
         <Button

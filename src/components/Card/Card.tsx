@@ -23,15 +23,15 @@ export type CardProps = {
 };
 
 const Card: React.FC<CardProps> = ({
-                                     className,
-                                     image,
-                                     captionSlot,
-                                     title,
-                                     subtitle,
-                                     contentSlot,
-                                     onClick,
-                                     actionSlot,
-                                   }) => {
+  className,
+  image,
+  captionSlot,
+  title,
+  subtitle,
+  contentSlot,
+  onClick,
+  actionSlot,
+}) => {
   const cardClass = classNames(styles['card'], className);
 
   return (
@@ -75,12 +75,7 @@ const Card: React.FC<CardProps> = ({
           <div className={styles['card__footer']}>
             {contentSlot && (
               <div className={styles['card__content-wrapper']}>
-                <Text
-                  view="p-20"
-                  weight="bold"
-                  color="accent"
-                  className={styles['card__content']}
-                >
+                <Text view="p-20" weight="bold" color="accent" className={styles['card__content']}>
                   {contentSlot}
                 </Text>
               </div>
