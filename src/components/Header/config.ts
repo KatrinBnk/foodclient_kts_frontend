@@ -26,4 +26,4 @@ export const menuItems: MenuItem[] = [
     link: ROUTES.MEAL_PLANNING,
     title: 'Meal Planning',
   },
-]; 
+];

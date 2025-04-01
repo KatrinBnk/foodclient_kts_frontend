@@ -1,4 +1,4 @@
-@import '@styles/variables';
+@use "@styles/variables" as *;
 
 .header {
   display: flex;
@@ -6,61 +6,55 @@
   justify-content: space-between;
   padding: 14px 100px;
   max-height: 64px;
-  background-color: #fff;
+  background-color: $bg-primary-color;
 }
 
-.logo {
+.header__logo {
   display: flex;
   align-items: center;
   text-decoration: none;
   gap: 20px;
-
-  &__title {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: 0;
-    color: #000;
-    margin: 0;
-  }
 }
 
-.nav {
+.header__nav {
   display: flex;
   gap: 32px;
 
   a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text-secondary-color;
+    }
+  }
+
+  &-link {
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0;
-    text-decoration: none;
     color: $text-primary-color;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $secondary-color;
-    }
   }
 
-  .active {
+  &-link--active {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 0;
-    color: $secondary-color;
+    color: $text-accent-color;
   }
 }
 
-.favorites,
-.profile {
+.header__favorites,
+.header__profile {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-left: 16px;
 }
 
-.favorites {
+.header__favorites {
   svg {
     position: relative;
     top: -2px;
