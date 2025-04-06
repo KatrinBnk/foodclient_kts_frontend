@@ -1,0 +1,24 @@
+.favorites {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+}
+
+.title {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.grid {
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px 80px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+} 

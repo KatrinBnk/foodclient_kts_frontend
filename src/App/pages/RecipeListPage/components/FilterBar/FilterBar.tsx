@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useRecipeListPage } from '@/stores/hooks';
+import { useRecipeListPage } from '@stores/hooks';
 import SearchBar from './SearchBar';
-import MultiDropdown, { Option } from '@/components/MultiDropdown';
+import MultiDropdown, { Option } from '@components/MultiDropdown';
 import styles from './FilterBar.module.scss';
-import { useDebouncedCallback } from '@/utils/useDebouncedCallback';
+import { useDebouncedCallback } from '@utils/useDebouncedCallback';
 
 const FilterBar: React.FC = () => {
   const { recipeStore, categoryStore } = useRecipeListPage();

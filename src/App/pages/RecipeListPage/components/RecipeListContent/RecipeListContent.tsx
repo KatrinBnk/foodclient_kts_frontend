@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { useRecipeListPage } from '@/stores/hooks';
+import { useRecipeListPage } from '@stores/hooks';
 import RecipeList from '../RecipeList';
 import FilterBar from '../FilterBar';
 import Pagination from '../Pagination';

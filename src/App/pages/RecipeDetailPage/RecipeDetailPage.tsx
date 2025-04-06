@@ -7,8 +7,8 @@ import FoodInfo from './components/FoodInfo';
 import Summary from './components/Summary';
 import Directions from './components/Directions';
 import NeededProducts from './components/NeededProducts';
-import { getFoodInfo } from '@/App/pages/RecipeDetailPage/configs/constants.ts';
-import { useRecipeDetailPage } from '@/stores/hooks';
+import { getFoodInfo } from './configs/constants';
+import { useRecipeDetailPage } from '@stores/hooks';
 
 const RecipeDetailPage: React.FC = () => {
   const { documentId } = useParams<{ documentId: string }>();

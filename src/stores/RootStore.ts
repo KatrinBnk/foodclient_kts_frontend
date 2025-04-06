@@ -2,19 +2,23 @@ import { makeObservable, observable } from 'mobx';
 import { RecipeStore } from './RecipeStore';
 import { RecipeDetailsStore } from './RecipeDetailsStore';
 import { CategoryStore } from './CategoryStore';
+import { SavedRecipesStore } from './SavedRecipesStore';
 
 export class RecipeListPageStore {
   recipeStore: RecipeStore;
   categoryStore: CategoryStore;
+  savedRecipesStore: SavedRecipesStore;
 
   constructor() {
     makeObservable(this, {
       recipeStore: observable,
       categoryStore: observable,
+      savedRecipesStore: observable,
     });
 
     this.categoryStore = new CategoryStore();
     this.recipeStore = new RecipeStore();
+    this.savedRecipesStore = new SavedRecipesStore();
   }
 }
 

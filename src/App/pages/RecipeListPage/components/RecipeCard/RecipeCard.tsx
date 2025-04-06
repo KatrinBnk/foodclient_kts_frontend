@@ -1,9 +1,10 @@
-import React from 'react';
 import { ShortRecipe } from '@/types';
 import Card from '@components/Card';
 import Button from '@components/Button';
 import styles from './RecipeCard.module.scss';
 import ClockIcon from '@components/Icons/ClockIcon';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '@/stores/hooks/useStore';
 
 interface RecipeCardProps {
   recipe: ShortRecipe;
@@ -11,7 +12,20 @@ interface RecipeCardProps {
   onCardClick: (documentId: string) => void;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onSave, onCardClick }) => {
+export const RecipeCard = observer(({ recipe, onSave, onCardClick }: RecipeCardProps) => {
+  const { recipeListPageStore } = useStore();
+  const isSaved = recipeListPageStore.savedRecipesStore.isRecipeSaved(recipe.documentId);
+
+  const handleSave = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isSaved) {
+      recipeListPageStore.savedRecipesStore.removeRecipe(recipe.documentId);
+    } else {
+      recipeListPageStore.savedRecipesStore.saveRecipe(recipe.documentId);
+    }
+    onSave(recipe.documentId);
+  };
+
   const ingredients = recipe.ingradients
     ? recipe.ingradients.map((item) => item.name).join(' + ')
     : 'Ingredients not specified';
@@ -37,17 +51,15 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onSave, onCardClick }) 
       }
       actionSlot={
         <Button
-          onClick={(e) => {
-            e.stopPropagation();
-            onSave(recipe.documentId);
-          }}
+          onClick={handleSave}
+          className={styles.saveButton}
         >
-          Save
+          {isSaved ? 'Resave' : 'Save'}
         </Button>
       }
       onClick={() => onCardClick(recipe.documentId)}
     />
   );
-};
+});
 
 export default RecipeCard;

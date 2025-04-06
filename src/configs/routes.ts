@@ -1,5 +1,6 @@
 export const ROUTES = {
   RECIPE_LIST: '/',
+  FAVORITES: '/favorites',
   RECIPE_DETAIL: '/recipe/:documentId',
   MEAL_CATEGORIES: '/categories',
   PRODUCTS: '/products',

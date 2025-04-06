@@ -1,2 +1,3 @@
 export { StoreContext } from './storeContext';
-export { default as StoreProvider } from './StoreProvider';
+export { default } from './StoreProvider';
+
