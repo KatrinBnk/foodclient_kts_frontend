@@ -33,7 +33,9 @@
       "@utils/*": ["src/utils/*"],
       "@configs/*": ["src/configs/*"],
       "@types/*": ["src/types/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@stores/*": ["src/stores/*"],
+      "@pages/*": ["src/App/pages/*"],
     }
 
   },
