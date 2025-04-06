@@ -1,0 +1,102 @@
+@use '@styles/variables' as *;
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover:not(:disabled) {
+      opacity: 0.7;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  // Стили для иконки
+  &__icon {
+    &--prev,
+    &--next {
+      width: 32px;
+      height: 32px;
+      fill: $secondary-color;
+      transition: transform 0.2s ease;
+      transform-origin: center;
+    }
+
+    &--prev {
+    }
+
+    &--next {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__pages {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: auto;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0;
+    padding: 10px 14px;
+
+    color: $text-primary-color;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+
+    &:hover {
+      color: $text-accent-color;
+    }
+
+    &--active {
+      background-color: $brand-color;
+      color: $bg-primary-color;
+
+      &:hover {
+        background-color: $brand-active-color;
+        color: $bg-primary-color;
+      }
+    }
+  }
+
+  &__ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+    color: #2f2f2f;
+  }
+}

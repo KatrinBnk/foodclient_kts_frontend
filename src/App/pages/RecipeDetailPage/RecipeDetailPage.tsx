@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { getRecipeById } from '@utils/api';
-import { ApiResponse, DetailedRecipe } from '@/types';
+import { observer } from 'mobx-react-lite';
 import styles from './RecipeDetailPage.module.scss';
 import HeaderDetail from './components/HeaderDetail';
 import FoodInfo from './components/FoodInfo';
@@ -9,45 +8,35 @@ import Summary from './components/Summary';
 import Directions from './components/Directions';
 import NeededProducts from './components/NeededProducts';
 import { getFoodInfo } from '@/App/pages/RecipeDetailPage/configs/constants.ts';
+import { useRecipeDetailPage } from '@/stores/hooks';
 
 const RecipeDetailPage: React.FC = () => {
   const { documentId } = useParams<{ documentId: string }>();
-  const [recipe, setRecipe] = useState<DetailedRecipe | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const isMounted = useRef(false);
+  const { recipeDetailsStore } = useRecipeDetailPage();
+
+  const fetchRecipe = useCallback(
+    (id: string) => {
+      recipeDetailsStore.fetchRecipeById(id);
+    },
+    [recipeDetailsStore]
+  );
 
   useEffect(() => {
-    const fetchRecipe = async () => {
-      if (!documentId) {
-        setError('Рецепт не найден');
-        setLoading(false);
-        return;
-      }
+    if (documentId) {
+      fetchRecipe(documentId);
+    }
+  }, [documentId, fetchRecipe]);
 
-      if (isMounted.current) return;
-      isMounted.current = true;
-
-      try {
-        const response: ApiResponse<DetailedRecipe> = await getRecipeById(documentId);
-        setRecipe(response.data);
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setError('Ошибка при загрузке рецепта');
-        setLoading(false);
-      }
-    };
-
-    fetchRecipe();
-  }, [documentId]);
-
-  if (loading) return <div className={styles['recipe-detail-page__container']}>Загрузка...</div>;
-  if (error || !recipe)
+  if (recipeDetailsStore.loading)
+    return <div className={styles['recipe-detail-page__container']}>Загрузка...</div>;
+  if (recipeDetailsStore.error || !recipeDetailsStore.recipe)
     return (
-      <div className={styles['recipe-detail-page__container']}>{error || 'Рецепт не найден'}</div>
+      <div className={styles['recipe-detail-page__container']}>
+        {recipeDetailsStore.error || 'Рецепт не найден'}
+      </div>
     );
 
+  const recipe = recipeDetailsStore.recipe;
   const foodInfo = getFoodInfo(recipe);
 
   return (
@@ -63,4 +52,5 @@ const RecipeDetailPage: React.FC = () => {
   );
 };
 
-export default RecipeDetailPage;
+export const RecipeDetailPageComponent = observer(RecipeDetailPage);
+export default RecipeDetailPageComponent;

@@ -1,14 +1,6 @@
 @use '@styles/variables' as *;
 
-.recipe-list-page__container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  padding: 64px 0;
-}
-
-.recipe-list-page__poster {
+.poster {
   position: relative;
   width: 100%;
 
@@ -18,7 +10,7 @@
     object-fit: cover;
   }
 
-  &-overlay {
+  &__overlay {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;

@@ -1,0 +1,72 @@
+@use '@styles/variables' as *;
+
+.input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: $input-bg;
+  border-radius: $border-radius;
+  padding: $space-s $space-xs;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__element {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    line-height: 20px;
+    color: $input-text;
+    outline: none;
+
+    &::placeholder {
+      color: $input-placeholder;
+    }
+  }
+
+  &:focus-within {
+    background-color: $input-bg-focus;
+    border: 1px solid $brand-color;
+
+    & .input__element {
+      color: $input-text-focus;
+    }
+  }
+
+  &--disabled {
+    background-color: $input-bg-disabled;
+    border: none;
+
+    & .input__element {
+      color: $input-text-disabled;
+
+      &::placeholder {
+        color: $input-placeholder;
+      }
+    }
+
+    & .input__after-slot {
+      opacity: 0.5;
+    }
+  }
+
+  &--with-icon {
+    & .input__element {
+      padding-right: $space-m;
+    }
+  }
+
+  &__after-slot {
+    position: absolute;
+    right: $space-xs;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-secondary;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
