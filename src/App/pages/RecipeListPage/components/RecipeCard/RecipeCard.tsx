@@ -50,10 +50,7 @@ export const RecipeCard = observer(({ recipe, onSave, onCardClick }: RecipeCardP
         <span className={styles['recipe-card__calories']}>{Math.round(recipe.calories)} kcal</span>
       }
       actionSlot={
-        <Button
-          onClick={handleSave}
-          className={styles.saveButton}
-        >
+        <Button onClick={handleSave} className={styles.saveButton}>
           {isSaved ? 'Resave' : 'Save'}
         </Button>
       }

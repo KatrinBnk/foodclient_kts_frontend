@@ -31,7 +31,7 @@ export const FavoritesPage = observer(() => {
         Saved Recipes
       </Text>
       <div className={styles.grid}>
-        {savedRecipesStore.savedRecipesDetails.map(recipe => (
+        {savedRecipesStore.savedRecipesDetails.map((recipe) => (
           <RecipeCard
             key={recipe.documentId}
             recipe={recipe}

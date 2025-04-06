@@ -35,7 +35,7 @@ export class SavedRecipesStore extends BaseStore {
 
   async fetchSavedRecipesDetails() {
     if (this.isLoading) return;
-    
+
     this.isLoading = true;
     try {
       const recipes = await Promise.all(
@@ -50,7 +50,9 @@ export class SavedRecipesStore extends BaseStore {
         })
       );
       runInAction(() => {
-        this.savedRecipesDetails = recipes.filter((recipe): recipe is ShortRecipe => recipe !== null);
+        this.savedRecipesDetails = recipes.filter(
+          (recipe): recipe is ShortRecipe => recipe !== null
+        );
       });
     } finally {
       runInAction(() => {
@@ -63,20 +65,24 @@ export class SavedRecipesStore extends BaseStore {
     if (!this.savedRecipesIds.includes(documentId)) {
       this.savedRecipesIds = [...this.savedRecipesIds, documentId];
       localStorage.setItem('savedRecipes', JSON.stringify(this.savedRecipesIds));
-      
-      getRecipeById(documentId).then(response => {
-        runInAction(() => {
-          this.savedRecipesDetails = [...this.savedRecipesDetails, response.data];
+
+      getRecipeById(documentId)
+        .then((response) => {
+          runInAction(() => {
+            this.savedRecipesDetails = [...this.savedRecipesDetails, response.data];
+          });
+        })
+        .catch((error) => {
+          console.error(`Error fetching new recipe ${documentId}:`, error);
         });
-      }).catch(error => {
-        console.error(`Error fetching new recipe ${documentId}:`, error);
-      });
     }
   }
 
   removeRecipe(documentId: string) {
-    this.savedRecipesIds = this.savedRecipesIds.filter(id => id !== documentId);
-    this.savedRecipesDetails = this.savedRecipesDetails.filter(recipe => recipe.documentId !== documentId);
+    this.savedRecipesIds = this.savedRecipesIds.filter((id) => id !== documentId);
+    this.savedRecipesDetails = this.savedRecipesDetails.filter(
+      (recipe) => recipe.documentId !== documentId
+    );
     localStorage.setItem('savedRecipes', JSON.stringify(this.savedRecipesIds));
   }
 
