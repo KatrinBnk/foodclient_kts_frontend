@@ -11,19 +11,12 @@
   }
 
   &__overlay {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    letter-spacing: 0;
     text-align: center;
-    color: $text-primary-color;
     width: 100%;
     margin: 36px auto 0;
 
     a {
-      color: $text-primary-color;
-      text-decoration: underline;
-
+      cursor: pointer;
       &:hover {
         text-decoration: none;
       }
