@@ -46,17 +46,20 @@
   }
 }
 
-.header__favorites,
-.header__profile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 16px;
-}
+.header__actions {
+  &-profile,
+  &-favorites,
+  &-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+  }
 
-.header__favorites {
-  svg {
-    position: relative;
-    top: -2px;
+  &-favorites {
+    svg {
+      position: relative;
+      top: -2px;
+    }
   }
 }

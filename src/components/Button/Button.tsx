@@ -39,7 +39,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled || loading}
       onClick={onClick}
     >
-      <Text view="button" color="button-text">
+      <Text tag="div" view="button" color="button-text">
         {children}
       </Text>
     </button>

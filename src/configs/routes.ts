@@ -6,4 +6,6 @@ export const ROUTES = {
   PRODUCTS: '/products',
   MENU_ITEMS: '/menu_items',
   MEAL_PLANNING: '/planning',
+  AUTH: '/auth',
+  PROFILE: '/profile',
 };

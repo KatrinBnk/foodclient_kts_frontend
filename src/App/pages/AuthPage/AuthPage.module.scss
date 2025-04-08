@@ -1,0 +1,35 @@
+@use '@styles/variables' as *;
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+
+  &__content {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba($brand-color, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    gap: $gap-m;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__button-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  &__button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+}
