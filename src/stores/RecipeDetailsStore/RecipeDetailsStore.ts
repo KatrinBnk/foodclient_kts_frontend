@@ -4,7 +4,6 @@ import { getRecipeById } from '@utils/api';
 import { DetailedRecipe } from '@types';
 
 export default class RecipeDetailsStore extends BaseStore {
-
   private _recipe: DetailedRecipe | null = null;
   private _currentRecipeId: string | null = null;
   private _isRequestInProgress: boolean = false;

@@ -3,7 +3,6 @@ import { BaseStore } from '@stores/BaseStore.ts';
 import { URLStateManager } from './URLStateManager.ts';
 
 export default class QueryParamsStore extends BaseStore {
-
   params: Record<string, string> = {};
   private static _instance: QueryParamsStore | null = null;
 

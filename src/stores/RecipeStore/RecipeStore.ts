@@ -6,7 +6,6 @@ import QueryParamsStore from '@stores/QueryParamsStore';
 import { IPaginationMeta } from './interfaces.ts';
 
 export default class RecipeStore extends BaseStore {
-
   searchQuery = '';
   currentPage = 1;
   meta: IPaginationMeta | null = null;

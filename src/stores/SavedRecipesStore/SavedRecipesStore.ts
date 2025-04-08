@@ -4,7 +4,6 @@ import { BaseRecipe } from '@types';
 import { getRecipeById } from '@utils/api.ts';
 
 export default class SavedRecipesStore extends BaseStore {
-
   private _savedRecipesIds: string[] = [];
   private _savedRecipesDetails: BaseRecipe[] = [];
   private _isLoading: boolean = false;

@@ -5,7 +5,6 @@ import QueryParamsStore from '@stores/QueryParamsStore';
 import { ICategory } from './interfaces.ts';
 
 export default class CategoryStore extends BaseStore {
-
   selectedIds: number[] = [];
 
   private _categories: ICategory[] = [];
