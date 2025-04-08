@@ -1,5 +1,5 @@
 import React from 'react';
-import { rootStore } from '../RootStore';
+import { rootStore } from '@stores/RootStore';
 import { StoreContext } from './storeContext';
 
 interface StoreProviderProps {

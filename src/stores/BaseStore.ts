@@ -13,11 +13,11 @@ export class BaseStore {
     });
   }
 
-  setLoading(value: boolean) {
+  setLoading(value: boolean): void {
     this.loading = value;
   }
 
-  setError(error: string | null) {
+  setError(error: string | null): void {
     this.error = error;
   }
 

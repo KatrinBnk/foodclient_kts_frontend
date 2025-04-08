@@ -8,11 +8,11 @@ import Summary from './components/Summary';
 import Directions from './components/Directions';
 import NeededProducts from './components/NeededProducts';
 import { getFoodInfo } from './configs/constants';
-import { useRecipeDetailPage } from '@stores/hooks';
+import { useStore } from '@stores/hooks';
 
 const RecipeDetailPage: React.FC = () => {
   const { documentId } = useParams<{ documentId: string }>();
-  const { recipeDetailsStore } = useRecipeDetailPage();
+  const { recipeDetailsStore } = useStore();
 
   const fetchRecipe = useCallback(
     (id: string) => {

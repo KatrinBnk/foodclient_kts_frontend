@@ -1,51 +1,50 @@
-import { makeObservable, observable } from 'mobx';
-import { RecipeStore } from './RecipeStore';
-import { RecipeDetailsStore } from './RecipeDetailsStore';
-import { CategoryStore } from './CategoryStore';
-import { SavedRecipesStore } from './SavedRecipesStore';
-
-export class RecipeListPageStore {
-  recipeStore: RecipeStore;
-  categoryStore: CategoryStore;
-  savedRecipesStore: SavedRecipesStore;
-
-  constructor() {
-    makeObservable(this, {
-      recipeStore: observable,
-      categoryStore: observable,
-      savedRecipesStore: observable,
-    });
-
-    this.categoryStore = new CategoryStore();
-    this.recipeStore = new RecipeStore();
-    this.savedRecipesStore = new SavedRecipesStore();
-  }
-}
-
-export class RecipeDetailPageStore {
-  recipeDetailsStore: RecipeDetailsStore;
-
-  constructor() {
-    makeObservable(this, {
-      recipeDetailsStore: observable,
-    });
-
-    this.recipeDetailsStore = new RecipeDetailsStore();
-  }
-}
+import { makeObservable, computed } from 'mobx';
+import RecipeStore from '@stores/RecipeStore';
+import RecipeDetailsStore from '@stores/RecipeDetailsStore';
+import CategoryStore from '@stores/CategoryStore';
+import SavedRecipesStore from '@stores/SavedRecipesStore';
 
 export class RootStore {
-  recipeListPageStore: RecipeListPageStore;
-  recipeDetailPageStore: RecipeDetailPageStore;
+  private _recipeStore: RecipeStore | null = null;
+  private _categoryStore: CategoryStore | null = null;
+  private _savedRecipesStore: SavedRecipesStore | null = null;
+  private _recipeDetailsStore: RecipeDetailsStore | null = null;
 
   constructor() {
     makeObservable(this, {
-      recipeListPageStore: observable,
-      recipeDetailPageStore: observable,
+      recipeStore: computed,
+      categoryStore: computed,
+      savedRecipesStore: computed,
+      recipeDetailsStore: computed,
     });
+  }
 
-    this.recipeListPageStore = new RecipeListPageStore();
-    this.recipeDetailPageStore = new RecipeDetailPageStore();
+  get recipeStore(): RecipeStore {
+    if (!this._recipeStore) {
+      this._recipeStore = new RecipeStore();
+    }
+    return this._recipeStore;
+  }
+
+  get categoryStore(): CategoryStore {
+    if (!this._categoryStore) {
+      this._categoryStore = new CategoryStore();
+    }
+    return this._categoryStore;
+  }
+
+  get savedRecipesStore(): SavedRecipesStore {
+    if (!this._savedRecipesStore) {
+      this._savedRecipesStore = new SavedRecipesStore();
+    }
+    return this._savedRecipesStore;
+  }
+
+  get recipeDetailsStore(): RecipeDetailsStore {
+    if (!this._recipeDetailsStore) {
+      this._recipeDetailsStore = new RecipeDetailsStore();
+    }
+    return this._recipeDetailsStore;
   }
 }
 

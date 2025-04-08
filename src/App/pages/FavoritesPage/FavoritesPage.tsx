@@ -5,13 +5,13 @@ import RecipeCard from '@pages/RecipeListPage/components/RecipeCard/RecipeCard';
 import styles from './FavoritesPage.module.scss';
 import Text from '@components/Text';
 import { useNavigate } from 'react-router-dom';
+import { BaseRecipe } from '@/types';
 
 // NOTE: использовать RecipeCard из RecipeList не окей, нужно будет поменять
 
 export const FavoritesPage = observer(() => {
   const navigate = useNavigate();
-  const { recipeListPageStore } = useStore();
-  const { savedRecipesStore } = recipeListPageStore;
+  const { savedRecipesStore } = useStore();
 
   useEffect(() => {
     savedRecipesStore.loadSavedRecipes();
@@ -31,7 +31,7 @@ export const FavoritesPage = observer(() => {
         Saved Recipes
       </Text>
       <div className={styles.grid}>
-        {savedRecipesStore.savedRecipesDetails.map((recipe) => (
+        {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
           <RecipeCard
             key={recipe.documentId}
             recipe={recipe}

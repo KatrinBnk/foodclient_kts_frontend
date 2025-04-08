@@ -8,13 +8,3 @@ export const useStore = () => {
   }
   return store;
 };
-
-export const useRecipeListPage = () => {
-  const store = useStore();
-  return store.recipeListPageStore;
-};
-
-export const useRecipeDetailPage = () => {
-  const store = useStore();
-  return store.recipeDetailPageStore;
-};

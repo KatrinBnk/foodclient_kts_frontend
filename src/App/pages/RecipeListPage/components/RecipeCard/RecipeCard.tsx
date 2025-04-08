@@ -13,15 +13,15 @@ interface RecipeCardProps {
 }
 
 export const RecipeCard = observer(({ recipe, onSave, onCardClick }: RecipeCardProps) => {
-  const { recipeListPageStore } = useStore();
-  const isSaved = recipeListPageStore.savedRecipesStore.isRecipeSaved(recipe.documentId);
+  const { savedRecipesStore } = useStore();
+  const isSaved = savedRecipesStore.isRecipeSaved(recipe.documentId);
 
   const handleSave = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isSaved) {
-      recipeListPageStore.savedRecipesStore.removeRecipe(recipe.documentId);
+      savedRecipesStore.removeRecipe(recipe.documentId);
     } else {
-      recipeListPageStore.savedRecipesStore.saveRecipe(recipe.documentId);
+      savedRecipesStore.saveRecipe(recipe.documentId);
     }
     onSave(recipe.documentId);
   };

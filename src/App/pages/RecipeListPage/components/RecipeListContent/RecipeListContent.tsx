@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { useRecipeListPage } from '@stores/hooks';
+import { useStore } from '@stores/hooks';
 import RecipeList from '../RecipeList';
 import FilterBar from '../FilterBar';
 import Pagination from '../Pagination';
@@ -10,7 +10,7 @@ import { Loader } from '@components/Loader';
 
 const RecipeListContent: React.FC = () => {
   const navigate = useNavigate();
-  const { recipeStore } = useRecipeListPage();
+  const { recipeStore } = useStore();
 
   useEffect(() => {
     recipeStore.fetchRecipes();
@@ -27,11 +27,7 @@ const RecipeListContent: React.FC = () => {
   return (
     <div className={styles['recipe-list-content']}>
       <FilterBar />
-      <RecipeList
-        recipes={recipeStore.filteredRecipes}
-        onSave={handleSave}
-        onCardClick={handleCardClick}
-      />
+      <RecipeList recipes={recipeStore.recipes} onSave={handleSave} onCardClick={handleCardClick} />
 
       {recipeStore.loading && (
         <div className={styles['recipe-list-content__loading']}>
@@ -45,7 +41,7 @@ const RecipeListContent: React.FC = () => {
         </div>
       )}
 
-      {recipeStore.filteredRecipes.length === 0 && (
+      {recipeStore.recipes.length === 0 && (
         <div className={styles['recipe-list-content__empty']}>No recipes found</div>
       )}
 
