@@ -1,29 +1,19 @@
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@stores/hooks/useStore';
 import { useEffect } from 'react';
-import RecipeCard from '@pages/RecipeListPage/components/RecipeCard/RecipeCard';
+import RecipeCard from '@pages/shared/RecipeCard';
 import styles from './FavoritesPage.module.scss';
 import Text from '@components/Text';
-import { useNavigate } from 'react-router-dom';
-import { BaseRecipe } from '@/types';
-
-// NOTE: использовать RecipeCard из RecipeList не окей, нужно будет поменять
+import { BaseRecipe } from '@types';
 
 export const FavoritesPage = observer(() => {
-  const navigate = useNavigate();
-  const { savedRecipesStore } = useStore();
+  const { savedRecipesStore, authStore } = useStore();
 
   useEffect(() => {
-    savedRecipesStore.loadSavedRecipes();
-  }, [savedRecipesStore]);
-
-  const handleSave = (documentId: string) => {
-    savedRecipesStore.removeRecipe(documentId);
-  };
-
-  const handleCardClick = (documentId: string) => {
-    navigate(`/recipe/${documentId}`);
-  };
+    if (authStore.user?.uid) {
+      savedRecipesStore.loadSavedRecipes(authStore.user.uid);
+    }
+  }, [savedRecipesStore, authStore.user?.uid]);
 
   return (
     <div className={styles.favorites}>
@@ -32,12 +22,7 @@ export const FavoritesPage = observer(() => {
       </Text>
       <div className={styles.grid}>
         {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
-          <RecipeCard
-            key={recipe.documentId}
-            recipe={recipe}
-            onSave={handleSave}
-            onCardClick={handleCardClick}
-          />
+          <RecipeCard key={recipe.documentId} recipe={recipe} />
         ))}
       </div>
     </div>

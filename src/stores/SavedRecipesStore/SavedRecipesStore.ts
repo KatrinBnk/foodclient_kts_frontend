@@ -2,11 +2,14 @@ import { makeObservable, observable, action, computed, runInAction } from 'mobx'
 import { BaseStore } from '@stores/BaseStore.ts';
 import { BaseRecipe } from '@types';
 import { getRecipeById } from '@utils/api.ts';
+import { collection, doc, getDocs, setDoc, deleteDoc, query, where } from 'firebase/firestore';
+import { db } from '@configs/firebaseConfig';
 
 export default class SavedRecipesStore extends BaseStore {
   private _savedRecipesIds: string[] = [];
   private _savedRecipesDetails: BaseRecipe[] = [];
   private _isLoading: boolean = false;
+  private readonly savedRecipesCollection = 'savedRecipes';
 
   constructor() {
     super();
@@ -19,7 +22,6 @@ export default class SavedRecipesStore extends BaseStore {
       fetchSavedRecipesDetails: action,
       isRecipeSaved: computed,
     });
-    this.loadSavedRecipes();
   }
 
   get isRecipeSaved(): (documentId: string) => boolean {
@@ -34,13 +36,25 @@ export default class SavedRecipesStore extends BaseStore {
     return this._savedRecipesDetails;
   }
 
-  loadSavedRecipes(): void {
-    const saved = localStorage.getItem('savedRecipes');
-    if (saved) {
-      this._savedRecipesIds = JSON.parse(saved);
-      if (this.savedRecipesIds.length > 0) {
-        this.fetchSavedRecipesDetails();
+  async loadSavedRecipes(userId: string): Promise<void> {
+    if (!userId) return;
+
+    try {
+      const savedRecipesRef = collection(db, this.savedRecipesCollection);
+      const q = query(savedRecipesRef, where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+
+      const recipeIds = querySnapshot.docs.map((doc) => doc.data().recipeId);
+
+      runInAction(() => {
+        this._savedRecipesIds = recipeIds;
+      });
+
+      if (recipeIds.length > 0) {
+        await this.fetchSavedRecipesDetails();
       }
+    } catch (error) {
+      console.error('Error loading saved recipes:', error);
     }
   }
 
@@ -72,28 +86,47 @@ export default class SavedRecipesStore extends BaseStore {
     }
   }
 
-  saveRecipe(documentId: string): void {
-    if (!this._savedRecipesIds.includes(documentId)) {
-      this._savedRecipesIds = [...this._savedRecipesIds, documentId];
-      localStorage.setItem('savedRecipes', JSON.stringify(this.savedRecipesIds));
+  async saveRecipe(documentId: string, userId: string): Promise<void> {
+    if (!userId) return;
 
-      getRecipeById(documentId)
-        .then((response) => {
-          runInAction(() => {
-            this._savedRecipesDetails = [...this._savedRecipesDetails, response.data];
-          });
-        })
-        .catch((error) => {
-          console.error(`Error fetching new recipe ${documentId}:`, error);
-        });
+    try {
+      const savedRecipeRef = doc(db, this.savedRecipesCollection, `${userId}_${documentId}`);
+      await setDoc(savedRecipeRef, {
+        userId,
+        recipeId: documentId,
+        savedAt: new Date().toISOString(),
+      });
+
+      runInAction(() => {
+        if (!this._savedRecipesIds.includes(documentId)) {
+          this._savedRecipesIds = [...this._savedRecipesIds, documentId];
+        }
+      });
+
+      const response = await getRecipeById(documentId);
+      runInAction(() => {
+        this._savedRecipesDetails = [...this._savedRecipesDetails, response.data];
+      });
+    } catch (error) {
+      console.error(`Error saving recipe ${documentId}:`, error);
     }
   }
 
-  removeRecipe(documentId: string): void {
-    this._savedRecipesIds = this._savedRecipesIds.filter((id) => id !== documentId);
-    this._savedRecipesDetails = this._savedRecipesDetails.filter(
-      (recipe) => recipe.documentId !== documentId
-    );
-    localStorage.setItem('savedRecipes', JSON.stringify(this.savedRecipesIds));
+  async removeRecipe(documentId: string, userId: string): Promise<void> {
+    if (!userId) return;
+
+    try {
+      const savedRecipeRef = doc(db, this.savedRecipesCollection, `${userId}_${documentId}`);
+      await deleteDoc(savedRecipeRef);
+
+      runInAction(() => {
+        this._savedRecipesIds = this._savedRecipesIds.filter((id) => id !== documentId);
+        this._savedRecipesDetails = this._savedRecipesDetails.filter(
+          (recipe) => recipe.documentId !== documentId
+        );
+      });
+    } catch (error) {
+      console.error(`Error removing recipe ${documentId}:`, error);
+    }
   }
 }
