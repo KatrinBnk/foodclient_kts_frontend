@@ -1,34 +1,50 @@
-import { ShortRecipe } from '@/types';
+import { ShortRecipe } from '@types';
 import Card from '@components/Card';
 import Button from '@components/Button';
 import styles from './RecipeCard.module.scss';
 import ClockIcon from '@components/Icons/ClockIcon';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '@/stores/hooks/useStore';
+import { useStore } from '@stores/hooks/useStore.ts';
+import { useNavigate } from 'react-router-dom';
 
 interface RecipeCardProps {
   recipe: ShortRecipe;
-  onSave: (documentId: string) => void;
-  onCardClick: (documentId: string) => void;
 }
 
-export const RecipeCard = observer(({ recipe, onSave, onCardClick }: RecipeCardProps) => {
-  const { savedRecipesStore } = useStore();
+export const RecipeCard = observer(({ recipe }: RecipeCardProps) => {
+  const { savedRecipesStore, authStore } = useStore();
+  const navigate = useNavigate();
   const isSaved = savedRecipesStore.isRecipeSaved(recipe.documentId);
+  const isAuthenticated = authStore.isAuthenticated;
+  const userId = authStore.user?.uid;
 
-  const handleSave = (e: React.MouseEvent) => {
+  const handleSave = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (isSaved) {
-      savedRecipesStore.removeRecipe(recipe.documentId);
-    } else {
-      savedRecipesStore.saveRecipe(recipe.documentId);
+
+    //TODO: нужно доработать
+    if (!isAuthenticated) {
+      alert('Для сохранения рецепта необходимо авторизоваться');
+      return;
     }
-    onSave(recipe.documentId);
+
+    if (!userId) return;
+
+    if (isSaved) {
+      await savedRecipesStore.removeRecipe(recipe.documentId, userId);
+    } else {
+      await savedRecipesStore.saveRecipe(recipe.documentId, userId);
+    }
+  };
+
+  const handleCardClick = (documentId: string) => {
+    navigate(`/recipe/${documentId}`);
   };
 
   const ingredients = recipe.ingradients
     ? recipe.ingradients.map((item) => item.name).join(' + ')
     : 'Ingredients not specified';
+
+  //NOTE: как назвать обратное дейстие действию сохранения? resave как будто бы немножко о другом
 
   return (
     <Card
@@ -54,7 +70,7 @@ export const RecipeCard = observer(({ recipe, onSave, onCardClick }: RecipeCardP
           {isSaved ? 'Resave' : 'Save'}
         </Button>
       }
-      onClick={() => onCardClick(recipe.documentId)}
+      onClick={() => handleCardClick(recipe.documentId)}
     />
   );
 });

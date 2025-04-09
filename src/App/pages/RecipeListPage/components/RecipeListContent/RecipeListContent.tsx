@@ -1,33 +1,23 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@stores/hooks';
-import RecipeList from '../RecipeList';
-import FilterBar from '../FilterBar';
-import Pagination from '../Pagination';
+import RecipeList from './RecipeList';
+import FilterBar from './FilterBar';
+import Pagination from './Pagination';
 import styles from './RecipeListContent.module.scss';
-import { Loader } from '@components/Loader';
+import Loader from '@components/Loader';
 
 const RecipeListContent: React.FC = () => {
-  const navigate = useNavigate();
   const { recipeStore } = useStore();
 
   useEffect(() => {
     recipeStore.fetchRecipes();
   }, [recipeStore]);
 
-  const handleSave = (documentId: string) => {
-    console.log(`Сохранен рецепт с documentId: ${documentId}`);
-  };
-
-  const handleCardClick = (documentId: string) => {
-    navigate(`/recipe/${documentId}`);
-  };
-
   return (
     <div className={styles['recipe-list-content']}>
       <FilterBar />
-      <RecipeList recipes={recipeStore.recipes} onSave={handleSave} onCardClick={handleCardClick} />
+      <RecipeList recipes={recipeStore.recipes} />
 
       {recipeStore.loading && (
         <div className={styles['recipe-list-content__loading']}>

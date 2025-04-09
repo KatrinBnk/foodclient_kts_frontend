@@ -4,7 +4,7 @@ import { useStore } from '@stores/hooks';
 import SearchBar from './SearchBar';
 import MultiDropdown, { Option } from '@components/MultiDropdown';
 import styles from './FilterBar.module.scss';
-import { useDebouncedCallback } from '@utils/useDebouncedCallback';
+import { useDebouncedCallback } from '@utils/useDebouncedCallback.ts';
 
 const FilterBar: React.FC = () => {
   const { recipeStore, categoryStore } = useStore();
