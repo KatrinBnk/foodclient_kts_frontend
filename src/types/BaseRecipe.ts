@@ -6,6 +6,7 @@ export interface BaseRecipe {
   calories: number;
   images: Image[];
   ingradients: Ingradient[];
+  vegetarian: boolean;
 }
 
 export interface Image {
