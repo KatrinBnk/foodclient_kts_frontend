@@ -1,1 +1,1 @@
-export {default} from './VegetarianIcon';
+export { default } from './VegetarianIcon';
