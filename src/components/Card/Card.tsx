@@ -20,6 +20,8 @@ export type CardProps = {
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   /** Слот для действия */
   actionSlot?: React.ReactNode;
+  /** Слот для изображения в правом верхнем углу */
+  imageSlot?: React.ReactNode;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -31,12 +33,14 @@ const Card: React.FC<CardProps> = ({
   contentSlot,
   onClick,
   actionSlot,
+  imageSlot,
 }) => {
   const cardClass = classNames(styles['card'], className);
 
   return (
     <div className={cardClass} onClick={onClick}>
       <div className={styles['card__header']}>
+        {imageSlot && <div className={styles['card__image-slot']}>{imageSlot}</div>}
         <img src={image} alt="Card image" className={styles['card__image']} />
       </div>
       <div className={styles['card__body']}>
