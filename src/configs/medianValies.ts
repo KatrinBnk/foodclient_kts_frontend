@@ -1,0 +1,4 @@
+export const MEDIAN_VALUES = {
+  CALORIE_CONTENT: 500,
+  TOTAL_TIME: 30,
+};
