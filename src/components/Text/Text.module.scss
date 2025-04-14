@@ -1,0 +1,84 @@
+@use '@styles/variables' as *;
+
+.text {
+  margin: 0;
+  padding: 0;
+
+  &--title {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
+  }
+
+  &--button {
+    font-size: 18px;
+    line-height: 18px;
+    font-weight: 500;
+  }
+
+  &--p-24 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  &--p-20 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  &--p-18 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  &--p-16 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  &--p-14 {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &--normal {
+    font-weight: normal;
+  }
+
+  &--medium {
+    font-weight: 600;
+  }
+
+  &--bold {
+    font-weight: 700;
+  }
+
+  &--primary {
+    color: $text-primary-color;
+  }
+
+  &--secondary {
+    color: $text-secondary-color;
+  }
+
+  &--accent {
+    color: $text-accent-color;
+  }
+
+  &--button-text {
+    color: $text-button-color;
+  }
+
+  &--max-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: var(--max-lines);
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+a {
+  color: $text-primary-color;
+  text-decoration: underline;
+}

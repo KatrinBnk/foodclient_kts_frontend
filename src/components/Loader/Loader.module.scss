@@ -1,0 +1,58 @@
+@use '@styles/variables' as *;
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  display: inline-block;
+  position: relative;
+  border-radius: 50%;
+
+  &::after {
+    content: '';
+    display: block;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: $brand-color;
+    border-left-color: $brand-color;
+    animation: rotate 0.8s linear infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &--size-s {
+    width: $loader-size-s;
+    height: $loader-size-s;
+
+    &::after {
+      border-width: 2px;
+    }
+  }
+
+  &--size-m {
+    width: $loader-size-m;
+    height: $loader-size-m;
+
+    &::after {
+      border-width: 3px;
+    }
+  }
+
+  &--size-l {
+    width: $loader-size-l;
+    height: $loader-size-l;
+
+    &::after {
+      border-width: 4px;
+    }
+  }
+}

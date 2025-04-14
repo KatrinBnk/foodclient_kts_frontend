@@ -1,0 +1,19 @@
+@use '@styles/variables' as *;
+
+.directions {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

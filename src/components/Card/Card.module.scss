@@ -1,0 +1,58 @@
+@use '@styles/variables' as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: $card-width;
+  height: $card-height;
+  background: $card-bg-color;
+  border-radius: $border-radius;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    background-color: rgba($card-bg-color, 0.6);
+  }
+}
+
+.card__header {
+  width: $card-width;
+  height: $card-width;
+  flex-shrink: 0;
+}
+
+.card__image {
+  width: $card-width;
+  height: $card-width;
+  object-fit: cover;
+  display: block;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 14px;
+  flex: 1;
+}
+
+.card__frame {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: auto;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.card__content-wrapper {
+  flex: 1;
+}
+
+.card__action-wrapper {
+  flex-shrink: 0;
+}

@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { ROUTES } from '@configs/routes';
+import StoreProvider from '@stores/context';
+import { useStore } from '@stores/hooks';
+import RecipeListPage from '@pages/RecipeListPage';
+import RecipeDetailPage from '@pages/RecipeDetailPage';
+import FavoritesPage from '@pages/FavoritesPage';
+import AuthPage from '@pages/AuthPage';
+import ProfilePage from '@pages/ProfilePage';
+import MainLayout from '@components/Layouts/MainLayout';
+import Loader from '@components/Loader';
 
-function App() {
-  const [count, setCount] = useState(0)
+// TODO: скорее всего поменять BrouserRouter на HashRouter (если нужно будет деплоить на gh-pages) и разнести нормально
 
+const ProtectedRoute = observer(({ children }: { children: React.ReactNode }) => {
+  const { authStore } = useStore();
+
+  //TODO: привести к нормальному виду
+  if (authStore.isLoading) {
+    return <Loader />;
+  }
+
+  if (!authStore.isAuthenticated) {
+    return <Navigate to={ROUTES.AUTH} />;
+  }
+
+  return <>{children}</>;
+});
+
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <StoreProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path={ROUTES.AUTH} element={<AuthPage />} />
+            <Route path={ROUTES.RECIPE_LIST} element={<RecipeListPage />} />
+            <Route path={ROUTES.RECIPE_DETAIL} element={<RecipeDetailPage />} />
+            <Route
+              path={ROUTES.FAVORITES}
+              element={
+                <ProtectedRoute>
+                  <FavoritesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={ROUTES.PROFILE}
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </StoreProvider>
+  );
+};
 
-export default App
+export default App;

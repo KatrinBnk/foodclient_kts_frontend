@@ -1,0 +1,65 @@
+@use '@styles/variables' as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 100px;
+  max-height: 64px;
+  background-color: $bg-primary-color;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 20px;
+}
+
+.header__nav {
+  display: flex;
+  gap: 32px;
+
+  a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $text-secondary-color;
+    }
+  }
+
+  &-link {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: $text-primary-color;
+  }
+
+  &-link--active {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: $text-accent-color;
+  }
+}
+
+.header__actions {
+  &-profile,
+  &-favorites,
+  &-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+  }
+
+  &-favorites {
+    svg {
+      position: relative;
+      top: -2px;
+    }
+  }
+}

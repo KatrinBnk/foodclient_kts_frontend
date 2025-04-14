@@ -1,0 +1,46 @@
+@use '@styles/variables' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $button-gap;
+  padding: $button-padding-vertical $button-padding-horizontal;
+  background-color: $button-bg-primary;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  min-height: $button-height;
+  transition: background-color 0.2s ease;
+
+  &:hover:not(&--disabled):not(&--loading) {
+    background-color: $button-bg-hover;
+  }
+
+  &:active:not(&--disabled):not(&--loading) {
+    background-color: $button-bg-active;
+  }
+
+  &--disabled {
+    background-color: $button-bg-disabled;
+    cursor: not-allowed;
+  }
+
+  &--loading {
+    background-color: $button-bg-primary;
+    cursor: not-allowed;
+
+    &:hover,
+    &:active {
+      background-color: $button-bg-primary;
+    }
+
+    &--disabled {
+      background-color: $button-bg-disabled;
+    }
+  }
+}
+
+.button__text {
+  display: inline-block;
+}
