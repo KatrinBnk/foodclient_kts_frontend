@@ -65,3 +65,10 @@ $text-secondary: rgba(175, 173, 181, 1);
 $dropdown-text: $text-primary-color;
 $dropdown-text-hover: $text-secondary-color;
 $dropdown-text-active: $text-accent-color;
+
+// CheckBox
+$checkbox-bg: rgba(255, 255, 255, 1);
+$checkbox-border: rgba(255, 255, 255, 1);
+$checkbox-bg-hover: rgba(255, 255, 255, 1);
+$checkbox-bg-disabled: rgba(255, 255, 255, 0.5);
+$checkbox-border-disabled: rgba(255, 255, 255, 0);
