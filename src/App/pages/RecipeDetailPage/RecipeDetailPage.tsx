@@ -45,7 +45,10 @@ const RecipeDetailPage: React.FC = () => {
       <div className={styles['recipe-detail-page__main']}>
         <FoodInfo imageUrl={recipe.images[0].url} imageAlt={recipe.name} info={foodInfo} />
         <Summary text={recipe.summary} />
-        <NeededProducts ingredients={recipe.ingradients} equipment={recipe.equipments} />
+        <NeededProducts
+          ingredients={recipeDetailsStore.recalculatedIngredients}
+          equipment={recipe.equipments}
+        />
         <Directions directions={recipe.directions} />
       </div>
     </main>

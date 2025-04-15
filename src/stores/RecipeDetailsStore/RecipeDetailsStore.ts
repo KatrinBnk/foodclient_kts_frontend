@@ -7,18 +7,43 @@ export default class RecipeDetailsStore extends BaseStore {
   private _recipe: DetailedRecipe | null = null;
   private _currentRecipeId: string | null = null;
   private _isRequestInProgress: boolean = false;
+  private _servings: number = 1;
 
   constructor() {
     super();
-    makeObservable<this, '_recipe' | 'setRecipe'>(this, {
+    makeObservable<this, '_recipe' | 'setRecipe' | '_servings'>(this, {
       _recipe: observable,
+      _servings: observable,
       fetchRecipeById: action,
       setRecipe: action,
+      setServings: action,
     });
   }
 
   get recipe(): DetailedRecipe | null {
     return this._recipe;
+  }
+
+  get servings(): number {
+    return this._servings;
+  }
+
+  get recalculatedIngredients() {
+    if (!this._recipe) return [];
+
+    const originalServings = this._recipe.servings || 1;
+    const multiplier = this._servings / originalServings;
+
+    return this._recipe.ingradients.map((ingredient) => ({
+      ...ingredient,
+      amount: ingredient.amount * multiplier,
+    }));
+  }
+
+  setServings(servings: number): void {
+    if (servings > 0) {
+      this._servings = servings;
+    }
   }
 
   async fetchRecipeById(id: string): Promise<void> {
@@ -31,6 +56,7 @@ export default class RecipeDetailsStore extends BaseStore {
       const result = await this.handleApiCall(() => getRecipeById(id));
       if (result) {
         this.setRecipe(result.data);
+        this._servings = result.data.servings || 1;
       }
     } finally {
       this._isRequestInProgress = false;
