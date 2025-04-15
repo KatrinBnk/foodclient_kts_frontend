@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import styles from './Header.module.scss';
+import styles from './HeaderDeck.module.scss';
 import HeartIcon from '@components/Icons/HeartIcon';
 import UserIcon from '@components/Icons/UserIcon';
-import logo from './logo.svg';
-import { menuItems, MenuItem } from './config';
+import logo from '../logo.svg';
+import { menuItems, MenuItem } from '../config.ts';
 import Text from '@components/Text';
 import { useStore } from '@stores/hooks';
 import { ROUTES } from '@configs/routes.ts';
@@ -13,7 +13,7 @@ import { ROUTES } from '@configs/routes.ts';
 const getLinkClass = ({ isActive }: { isActive: boolean }) =>
   isActive ? styles['header__nav-link--active'] : '';
 
-const Header: React.FC = observer(() => {
+const HeaderDeck: React.FC = observer(() => {
   const location = useLocation();
   const { authStore } = useStore();
   const isRecipesActive = location.pathname === '/' || location.pathname.startsWith('/recipe/');
@@ -26,9 +26,9 @@ const Header: React.FC = observer(() => {
           Food Client
         </Text>
       </Link>
-      {/* TODO: переделать под использованние компонента текста??*/}
       <nav className={styles['header__nav']}>
         {menuItems.map((item: MenuItem) => (
+          !item.isForMobile && (item.isProtected ? authStore.isAuthenticated : true) &&
           <NavLink
             key={item.link}
             to={item.link}
@@ -62,4 +62,4 @@ const Header: React.FC = observer(() => {
   );
 });
 
-export default Header;
+export default HeaderDeck;

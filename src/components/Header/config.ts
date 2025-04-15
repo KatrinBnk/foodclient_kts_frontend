@@ -3,6 +3,8 @@ import { ROUTES } from '@configs/routes';
 export interface MenuItem {
   link: string;
   title: string;
+  isProtected?: boolean;
+  isForMobile?: boolean;
 }
 
 export const menuItems: MenuItem[] = [
@@ -11,19 +13,27 @@ export const menuItems: MenuItem[] = [
     title: 'Recipes',
   },
   {
-    link: ROUTES.MEAL_CATEGORIES,
-    title: 'Meals Categories',
+    link: ROUTES.RANDOM_RECIPE,
+    title: 'Random Recipe',
   },
   {
-    link: ROUTES.PRODUCTS,
-    title: 'Products',
+    link: ROUTES.DAILY_RECIPE,
+    title: 'Daily Recipe',
   },
   {
-    link: ROUTES.MENU_ITEMS,
-    title: 'Menu Items',
+    link: ROUTES.FAVORITES,
+    title: 'Favorites',
+    isProtected: true,
   },
   {
-    link: ROUTES.MEAL_PLANNING,
-    title: 'Meal Planning',
+    link: ROUTES.PROFILE,
+    title: 'Profile',
+    isProtected: true,
+    isForMobile: true,
   },
+  {
+    link: ROUTES.AUTH,
+    title: 'Login',
+    isForMobile: true,
+  }
 ];

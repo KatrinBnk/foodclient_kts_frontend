@@ -5,3 +5,9 @@ body {
   background: #ffc0763b 23%;
   align-content: center;
 }
+
+@media (max-width: 768px) {
+  .main-layout__content {
+    padding-top: 56px;
+  }
+} 

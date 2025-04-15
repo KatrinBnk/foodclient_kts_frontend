@@ -2,10 +2,8 @@ export const ROUTES = {
   RECIPE_LIST: '/',
   FAVORITES: '/favorites',
   RECIPE_DETAIL: '/recipe/:documentId',
-  MEAL_CATEGORIES: '/categories',
-  PRODUCTS: '/products',
-  MENU_ITEMS: '/menu_items',
-  MEAL_PLANNING: '/planning',
+  DAILY_RECIPE: '/daily-recipe/:documentId',
+  RANDOM_RECIPE: '/random-recipe/:documentId',
   AUTH: '/auth',
   PROFILE: '/profile',
 };
