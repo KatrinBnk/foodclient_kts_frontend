@@ -16,9 +16,9 @@ const NeededProducts: React.FC<NeededProductsProps> = ({ ingredients, equipment 
   const { recipeDetailsStore } = useStore();
 
   return (
-    <>
+    <div className={styles['needed-products-container']}>
       <div className={styles['servings-control']}>
-        <Text view="p-24" tag="h2" weight="bold">
+        <Text view="p-20" tag="h2" weight="bold">
           Servings
         </Text>
         <Input
@@ -34,7 +34,7 @@ const NeededProducts: React.FC<NeededProductsProps> = ({ ingredients, equipment 
         <div className={styles['needed-products__ingredients']}>
           <div className={styles['needed-products__header']}>
             <Text
-              view="p-24"
+              view="p-20"
               tag="h2"
               weight="bold"
               className={styles['needed-products__ingredients-title']}
@@ -74,7 +74,7 @@ const NeededProducts: React.FC<NeededProductsProps> = ({ ingredients, equipment 
 
         <div className={styles['needed-products__equipment']}>
           <Text
-            view="p-24"
+            view="p-20"
             tag="h2"
             weight="bold"
             className={styles['needed-products__equipment-title']}
@@ -100,7 +100,7 @@ const NeededProducts: React.FC<NeededProductsProps> = ({ ingredients, equipment 
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

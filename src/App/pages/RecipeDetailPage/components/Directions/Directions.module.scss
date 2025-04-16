@@ -3,17 +3,37 @@
 .directions {
   &__title {
     margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 480px) {
+      margin-bottom: 12px;
+    }
   }
 
   &__list {
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    @media (max-width: 768px) {
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 8px;
+    }
   }
 
   &__step {
     display: flex;
     flex-direction: column;
     gap: 4px;
+
+    @media (max-width: 480px) {
+      gap: 2px;
+    }
   }
 }

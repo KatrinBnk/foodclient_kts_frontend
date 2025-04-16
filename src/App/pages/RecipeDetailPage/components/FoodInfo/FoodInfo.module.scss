@@ -7,11 +7,36 @@
   gap: 166px;
   height: 298px;
 
+  @media (max-width: 1024px) {
+    gap: 80px;
+    height: 250px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 32px;
+    height: auto;
+  }
+
   img {
     max-width: 448px;
     height: 298px;
     border-radius: $border-radius;
     object-fit: cover;
+
+    @media (max-width: 1024px) {
+      max-width: 350px;
+      height: 250px;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      height: 200px;
+    }
+
+    @media (max-width: 480px) {
+      height: 180px;
+    }
   }
 }
 
@@ -21,6 +46,21 @@
   grid-auto-rows: min-content;
   gap: 50px 100px;
   align-items: start;
+
+  @media (max-width: 1024px) {
+    gap: 40px 60px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .food-info__item {
@@ -29,6 +69,10 @@
   gap: 8px;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
 
   &[style*='grid-column: 1'] {
     justify-self: start;

@@ -4,6 +4,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @media (max-width: 768px) {
+    gap: 6px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 4px;
+  }
 }
 
 .header-detail__back-button {
@@ -11,8 +19,40 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  cursor: pointer;
+  padding: 8px;
+
+  @media (max-width: 768px) {
+    padding: 6px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px;
+  }
 }
 
 .header-detail__back-button-icon {
   transform: translate(3px, 3px);
+
+  @media (max-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.header-detail__title {
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
