@@ -5,12 +5,7 @@ export interface IPaginationMeta {
   total: number;
 }
 
-export interface ICaloriesRange {
-  min?: number;
-  max?: number;
-}
-
-export interface ITotalTimeRange {
+export interface IRange {
   min?: number;
   max?: number;
 }
