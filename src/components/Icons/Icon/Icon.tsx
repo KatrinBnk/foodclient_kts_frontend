@@ -4,7 +4,7 @@ import styles from './Icon.module.scss';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
   className?: string;
-  color?: 'primary' | 'secondary' | 'accent' | 'brand';
+  color?: 'primary' | 'secondary' | 'accent' | 'brand' | 'green';
 };
 
 const Icon: React.FC<IconProps> = ({

@@ -1,19 +1,31 @@
 import axios from 'axios';
 import qs from 'qs';
 import { apiEndpoints } from '@configs/api';
+import { ICaloriesRange, ITotalTimeRange } from '@stores/RecipeStore/interfaces';
 
 interface GetRecipesParams {
   page?: number;
   pageSize?: number;
   query?: string;
   categories?: number[];
+  vegetarian?: boolean;
+  calories?: ICaloriesRange;
+  totalTime?: ITotalTimeRange;
 }
 
 export const getRecipes = async (params: GetRecipesParams = {}) => {
-  const { page = 1, pageSize = 9, query = '', categories = [] } = params;
+  const {
+    page = 1,
+    pageSize = 9,
+    query = '',
+    categories = [],
+    vegetarian = false,
+    calories,
+    totalTime,
+  } = params;
 
   const queryParams = {
-    populate: ['images'],
+    populate: ['images', 'ingradients'],
     pagination: {
       page,
       pageSize,
@@ -35,6 +47,23 @@ export const getRecipes = async (params: GetRecipesParams = {}) => {
             },
           }
         : {}),
+      ...(vegetarian && {
+        vegetarian: {
+          $eq: true,
+        },
+      }),
+      ...(calories && {
+        calories: {
+          ...(calories.min !== undefined && { $gte: calories.min }),
+          ...(calories.max !== undefined && { $lte: calories.max }),
+        },
+      }),
+      ...(totalTime && {
+        totalTime: {
+          ...(totalTime.min !== undefined && { $gte: totalTime.min }),
+          ...(totalTime.max !== undefined && { $lte: totalTime.max }),
+        },
+      }),
     },
   };
 

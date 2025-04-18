@@ -3,6 +3,7 @@ import Card from '@components/Card';
 import Button from '@components/Button';
 import styles from './RecipeCard.module.scss';
 import ClockIcon from '@components/Icons/ClockIcon';
+import VegetarianIcon from '@components/Icons/VegetarianIcon';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '@stores/hooks/useStore.ts';
 import { useNavigate } from 'react-router-dom';
@@ -69,6 +70,18 @@ export const RecipeCard = observer(({ recipe }: RecipeCardProps) => {
         <Button onClick={handleSave} className={styles.saveButton}>
           {isSaved ? 'Resave' : 'Save'}
         </Button>
+      }
+      imageSlot={
+        recipe.vegetarian && (
+          <div className={styles['recipe-card__vegetarian']} title="Vegetarian dish">
+            <VegetarianIcon
+              className={styles['recipe-card__vegetarian-icon']}
+              width={35}
+              height={35}
+              color="green"
+            />
+          </div>
+        )
       }
       onClick={() => handleCardClick(recipe.documentId)}
     />
