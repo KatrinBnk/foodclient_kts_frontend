@@ -41,11 +41,11 @@ const AuthPage: React.FC = () => {
     <div className={styles.auth}>
       <div className={styles.auth__content}>
         <div className={styles.auth__header}>
-          <Text view="p-20" tag="h1" weight="bold" className={styles.auth__title}>
+          <Text view="p-24" tag="h1" weight="bold" className={styles.auth__title}>
             Welcome to FoodClient!
           </Text>
-          <Text view="p-18" color="secondary" className={styles.auth__subtitle}>
-            Sign in to access additional features
+          <Text view="p-20" color="secondary" className={styles.auth__subtitle}>
+            Ту-ту-ту, тут что-то надо написать
           </Text>
         </div>
 
