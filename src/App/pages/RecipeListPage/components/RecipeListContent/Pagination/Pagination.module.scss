@@ -8,6 +8,12 @@
   margin-top: 48px;
   margin-bottom: 48px;
 
+  @media (max-width: 768px) {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    gap: 4px;
+  }
+
   &__button {
     display: flex;
     align-items: center;
@@ -19,6 +25,11 @@
     cursor: pointer;
     transition: opacity 0.2s ease;
 
+    @media (max-width: 768px) {
+      width: 24px;
+      height: 24px;
+    }
+
     &:hover:not(:disabled) {
       opacity: 0.7;
     }
@@ -29,7 +40,6 @@
     }
   }
 
-  // Стили для иконки
   &__icon {
     &--prev,
     &--next {
@@ -38,6 +48,11 @@
       fill: $secondary-color;
       transition: transform 0.2s ease;
       transform-origin: center;
+
+      @media (max-width: 768px) {
+        width: 24px;
+        height: 24px;
+      }
     }
 
     &--prev {
@@ -52,6 +67,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @media (max-width: 768px) {
+      gap: 4px;
+    }
   }
 
   &__page {
@@ -69,6 +88,13 @@
     line-height: 22px;
     letter-spacing: 0;
     padding: 10px 14px;
+
+    @media (max-width: 768px) {
+      width: 24px;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 6px 8px;
+    }
 
     color: $text-primary-color;
     transition:
@@ -98,5 +124,11 @@
     height: 32px;
     font-size: 18px;
     color: #2f2f2f;
+
+    @media (max-width: 768px) {
+      width: 24px;
+      height: 24px;
+      font-size: 16px;
+    }
   }
 }

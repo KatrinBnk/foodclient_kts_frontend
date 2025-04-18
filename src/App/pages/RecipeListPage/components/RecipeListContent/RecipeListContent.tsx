@@ -27,7 +27,7 @@ const RecipeListContent: React.FC = () => {
 
       {recipeStore.error && (
         <div className={styles['recipe-list-content__error']}>
-          Произошла ошибка при загрузке рецептов
+          An error occurred when uploading recipes
         </div>
       )}
 
