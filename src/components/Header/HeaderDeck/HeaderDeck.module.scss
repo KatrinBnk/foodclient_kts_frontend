@@ -20,9 +20,14 @@
   display: flex;
   gap: 32px;
 
-  a {
+  a,
+  button {
     text-decoration: none;
     transition: color 0.2s ease;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
 
     &:hover {
       color: $text-secondary-color;

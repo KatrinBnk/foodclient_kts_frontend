@@ -1,1 +1,1 @@
-export { default } from './HeaderDeck.tsx'
+export { default } from './HeaderDeck.tsx';
