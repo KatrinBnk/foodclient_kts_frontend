@@ -1,0 +1,54 @@
+@use '@styles/variables' as *;
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 16px 24px;
+  border-radius: $border-radius;
+  background-color: $bg-primary-color;
+  box-shadow: 0 4px 20px rgba($text-accent-color, 0.2);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out forwards;
+
+  @media (max-width: 768px) {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    padding: 12px 16px;
+  }
+
+  &--success {
+    background-color: rgba($success-color, 0.5);
+  }
+
+  &--error {
+    background-color: rgba($error-color, 0.5);
+  }
+
+  &--info {
+    background-color: rgba($info-color, 0.5);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
