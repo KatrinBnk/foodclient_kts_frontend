@@ -45,7 +45,7 @@ const AuthPage: React.FC = () => {
             Welcome to FoodClient!
           </Text>
           <Text view="p-20" color="secondary" className={styles.auth__subtitle}>
-            Ту-ту-ту, тут что-то надо написать
+            Sign in to access additional features
           </Text>
         </div>
 
