@@ -7,9 +7,9 @@ const MainLayout: React.FC = () => {
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
-    <div className='main-layout'>
+    <div className="main-layout">
       {isMobile ? <HeaderMobile /> : <HeaderDeck />}
-      <main className='main-layout__content'>
+      <main className="main-layout__content">
         <Outlet />
       </main>
     </div>
