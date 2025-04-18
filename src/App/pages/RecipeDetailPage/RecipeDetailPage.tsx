@@ -9,6 +9,7 @@ import Directions from './components/Directions';
 import NeededProducts from './components/NeededProducts';
 import { getFoodInfo } from './configs/constants';
 import { useStore } from '@stores/hooks';
+import { Loader } from '@components/Loader';
 
 const RecipeDetailPage: React.FC = () => {
   const { documentId } = useParams<{ documentId: string }>();
@@ -27,16 +28,23 @@ const RecipeDetailPage: React.FC = () => {
     }
   }, [documentId, fetchRecipe]);
 
-  if (recipeDetailsStore.loading)
-    return <div className={styles['recipe-detail-page__container']}>Загрузка...</div>;
-  if (recipeDetailsStore.error || !recipeDetailsStore.recipe)
+  if (recipeDetailsStore.loading || (!recipeDetailsStore.recipe && !recipeDetailsStore.error)) {
     return (
       <div className={styles['recipe-detail-page__container']}>
-        {recipeDetailsStore.error || 'Рецепт не найден'}
+        <Loader size="m" />
       </div>
     );
+  }
 
-  const recipe = recipeDetailsStore.recipe;
+  if (recipeDetailsStore.error) {
+    return (
+      <div className={styles['recipe-detail-page__container']}>
+        {'Recipe upload error'}
+      </div>
+    );
+  }
+
+  const recipe = recipeDetailsStore.recipe!;
   const foodInfo = getFoodInfo(recipe);
 
   return (
