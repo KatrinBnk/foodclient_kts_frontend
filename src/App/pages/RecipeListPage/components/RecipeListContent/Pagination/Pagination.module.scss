@@ -88,6 +88,10 @@
     line-height: 22px;
     letter-spacing: 0;
     padding: 10px 14px;
+    color: $text-primary-color;
+    transition:
+            background-color 0.2s ease,
+            color 0.2s ease;
 
     @media (max-width: 768px) {
       width: 24px;
@@ -95,11 +99,6 @@
       line-height: 20px;
       padding: 6px 8px;
     }
-
-    color: $text-primary-color;
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
 
     &:hover {
       color: $text-accent-color;
