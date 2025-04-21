@@ -1,7 +1,7 @@
 # FoodClient
 
 Проект, выполняемый в рамках курса ["Начинающий React разработчик"](https://metaclass.kts.studio/).
-Тема курсового проекта: Food Strapi. 
+Тема курсового проекта: Food Strapi. [Презентация](https://www.figma.com/slides/mRlwx9UAAfBsapx7D2z6JJ/Research-Readout?node-id=1-590&t=rkYq5nNpxcu3u4es-1)
 
 ## Основные реализованные возможности
 
