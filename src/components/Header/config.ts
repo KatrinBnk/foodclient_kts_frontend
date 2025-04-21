@@ -13,10 +13,10 @@ const getRecipeOfTheDayId = async () => {
   try {
     const today = new Date();
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    
+
     const response = await getRecipes({ pageSize: 100 });
     const recipes = response.data;
-    
+
     if (recipes.length === 0) {
       return null;
     }
@@ -29,39 +29,41 @@ const getRecipeOfTheDayId = async () => {
   }
 };
 
-const recipeOfTheDayId = await getRecipeOfTheDayId();
-const dailyRecipeRoute = recipeOfTheDayId ? `/recipe/${recipeOfTheDayId}` : ROUTES.RECIPE_LIST;
+export async function getMenuItems(): Promise<MenuItem[]> {
+  const recipeOfTheDayId = await getRecipeOfTheDayId();
+  const dailyRecipeRoute = recipeOfTheDayId ? `/recipe/${recipeOfTheDayId}` : ROUTES.RECIPE_LIST;
 
-export const menuItems: MenuItem[] = [
-  {
-    link: ROUTES.RECIPE_LIST,
-    title: 'Recipes',
-  },
-  {
-    link: '...',
-    title: 'Random Recipe',
-    isRandom: true,
-  },
-  {
-    link: dailyRecipeRoute,
-    title: 'Daily Recipe',
-  },
-  {
-    link: ROUTES.FAVORITES,
-    title: 'Favorites',
-    isProtected: true,
-    isForMobile: true,
-  },
-  {
-    link: ROUTES.PROFILE,
-    title: 'Profile',
-    isProtected: true,
-    isForMobile: true,
-  },
-  {
-    link: ROUTES.AUTH,
-    title: 'Login',
-    isForMobile: true,
-    isProtected: false,
-  }
-];
+  return [
+    {
+      link: ROUTES.RECIPE_LIST,
+      title: 'Recipes',
+    },
+    {
+      link: '...',
+      title: 'Random Recipe',
+      isRandom: true,
+    },
+    {
+      link: dailyRecipeRoute,
+      title: 'Daily Recipe',
+    },
+    {
+      link: ROUTES.FAVORITES,
+      title: 'Favorites',
+      isProtected: true,
+      isForMobile: true,
+    },
+    {
+      link: ROUTES.PROFILE,
+      title: 'Profile',
+      isProtected: true,
+      isForMobile: true,
+    },
+    {
+      link: ROUTES.AUTH,
+      title: 'Login',
+      isForMobile: true,
+      isProtected: false,
+    }
+  ];
+}

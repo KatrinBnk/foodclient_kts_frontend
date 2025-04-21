@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import styles from './HeaderMobile.module.scss';
 import logo from '../logo.svg';
-import { menuItems, MenuItem } from '../config.ts';
+import { getMenuItems, MenuItem } from '../config.ts';
 import Text from '@components/Text';
 import { useStore } from '@stores/hooks';
 import { useRandomRecipeNavigation } from '../useRandomRecipeNavigation';
@@ -18,6 +18,12 @@ const HeaderMobile: React.FC = observer(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isRecipesActive = location.pathname === '/' || location.pathname.startsWith('/recipe/');
   const { handleClick, showNoRecipesToast, setShowNoRecipesToast } = useRandomRecipeNavigation();
+
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+  useEffect(() => {
+    getMenuItems().then(items => setMenuItems(items));
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
