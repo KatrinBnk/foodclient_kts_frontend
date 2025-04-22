@@ -10,10 +10,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 
   @include lessThanTablet {
     padding: 20px 10px;
     min-height: 80vh;
+  }
+
+  @include lessThanPhone {
+    padding: 16px 8px;
   }
 
   &__content {
@@ -26,6 +31,10 @@
 
     @include lessThanTablet {
       padding: 24px 16px;
+    }
+
+    @include lessThanPhone {
+      padding: 16px 8px;
     }
   }
 
