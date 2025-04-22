@@ -124,7 +124,7 @@ export default class RecipeStore extends BaseStore {
   async fetchRecipes(): Promise<void> {
     const currentParams = this.getRequestParamsKey();
 
-    if (this._isRequestInProgress || this._lastRequestParams === currentParams) {
+    if ((this._isRequestInProgress || this._lastRequestParams === currentParams) && this._recipes.length) {
       return;
     }
 
