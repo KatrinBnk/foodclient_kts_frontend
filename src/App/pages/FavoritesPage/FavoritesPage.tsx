@@ -5,6 +5,7 @@ import RecipeCard from '@pages/shared/RecipeCard';
 import styles from './FavoritesPage.module.scss';
 import Text from '@components/Text';
 import { BaseRecipe } from '@types';
+import { Loader } from '@components/Loader';
 
 export const FavoritesPage = observer(() => {
   const { savedRecipesStore, authStore } = useStore();
@@ -20,11 +21,19 @@ export const FavoritesPage = observer(() => {
       <Text view="title" tag="h1" weight="bold" className={styles.title}>
         Saved Recipes
       </Text>
-      <div className={styles.grid}>
-        {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
-          <RecipeCard key={recipe.documentId} recipe={recipe} />
-        ))}
-      </div>
+      {
+        savedRecipesStore.loading ? (
+          <div className={styles.loader}>
+            <Loader size="m" />
+          </div>
+        ): (
+          <div className={styles.grid}>
+            {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
+              <RecipeCard key={recipe.documentId} recipe={recipe} />
+            ))}
+          </div>
+        )
+      }
     </div>
   );
 });

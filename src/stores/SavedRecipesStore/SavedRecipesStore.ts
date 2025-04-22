@@ -8,7 +8,6 @@ import { db } from '@configs/firebaseConfig';
 export default class SavedRecipesStore extends BaseStore {
   private _savedRecipesIds: string[] = [];
   private _savedRecipesDetails: BaseRecipe[] = [];
-  private _isLoading: boolean = false;
   private readonly savedRecipesCollection = 'savedRecipes';
 
   constructor() {
@@ -59,9 +58,9 @@ export default class SavedRecipesStore extends BaseStore {
   }
 
   async fetchSavedRecipesDetails(): Promise<void> {
-    if (this._isLoading) return;
+    if (this.loading) return;
 
-    this._isLoading = true;
+    this.loading = true;
     try {
       const recipes = await Promise.all(
         this._savedRecipesIds.map(async (id) => {
@@ -81,7 +80,7 @@ export default class SavedRecipesStore extends BaseStore {
       });
     } finally {
       runInAction(() => {
-        this._isLoading = false;
+        this.loading = false;
       });
     }
   }
