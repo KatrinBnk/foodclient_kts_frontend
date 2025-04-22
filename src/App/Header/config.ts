@@ -64,6 +64,6 @@ export async function getMenuItems(): Promise<MenuItem[]> {
       title: 'Login',
       isForMobile: true,
       isProtected: false,
-    }
+    },
   ];
 }

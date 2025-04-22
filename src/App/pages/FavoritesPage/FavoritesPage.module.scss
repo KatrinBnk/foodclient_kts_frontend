@@ -27,18 +27,18 @@
   gap: 64px 80px;
   margin: 50px auto;
 
-  @include lessThanDesktop{
+  @include lessThanDesktop {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 40px;
   }
 
-  @include lessThanTablet{
+  @include lessThanTablet {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px 32px;
     margin: 32px auto;
   }
 
-  @include lessThanPhone{
+  @include lessThanPhone {
     grid-template-columns: 1fr;
     gap: 16px 20px;
     margin: 24px auto;

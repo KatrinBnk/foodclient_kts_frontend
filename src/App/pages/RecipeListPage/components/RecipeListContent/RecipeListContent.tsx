@@ -17,7 +17,7 @@ const RecipeListContent: React.FC = () => {
   return (
     <div className={styles['recipe-list-content']}>
       <FilterBar />
-      
+
       {recipeStore.loading ? (
         <div className={styles['recipe-list-content__loading']}>
           <Loader size="m" />
@@ -25,7 +25,7 @@ const RecipeListContent: React.FC = () => {
       ) : (
         <>
           <RecipeList recipes={recipeStore.recipes} />
-          
+
           {recipeStore.error && (
             <div className={styles['recipe-list-content__error']}>
               An error occurred when uploading recipes

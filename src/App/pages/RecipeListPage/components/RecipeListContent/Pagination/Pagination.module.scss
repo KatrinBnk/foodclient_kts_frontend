@@ -89,8 +89,8 @@
     padding: 10px 14px;
     color: $text-primary-color;
     transition:
-            background-color 0.2s ease,
-            color 0.2s ease;
+      background-color 0.2s ease,
+      color 0.2s ease;
 
     @include lessThanTablet {
       width: 24px;

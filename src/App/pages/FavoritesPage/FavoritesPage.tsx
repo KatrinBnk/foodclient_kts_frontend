@@ -21,19 +21,17 @@ export const FavoritesPage = observer(() => {
       <Text view="title" tag="h1" weight="bold" className={styles.title}>
         Saved Recipes
       </Text>
-      {
-        savedRecipesStore.loading ? (
-          <div className={styles.loader}>
-            <Loader size="m" />
-          </div>
-        ): (
-          <div className={styles.grid}>
-            {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
-              <RecipeCard key={recipe.documentId} recipe={recipe} />
-            ))}
-          </div>
-        )
-      }
+      {savedRecipesStore.loading ? (
+        <div className={styles.loader}>
+          <Loader size="m" />
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {savedRecipesStore.savedRecipesDetails.map((recipe: BaseRecipe) => (
+            <RecipeCard key={recipe.documentId} recipe={recipe} />
+          ))}
+        </div>
+      )}
     </div>
   );
 });

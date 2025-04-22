@@ -13,9 +13,11 @@ const ProtectedRoute = observer(({ children }: ProtectedRouteProps) => {
   const { authStore } = useStore();
 
   if (authStore.isLoading) {
-    return <div className={styles.loader}>
-      <Loader size="m" />
-    </div>;
+    return (
+      <div className={styles.loader}>
+        <Loader size="m" />
+      </div>
+    );
   }
 
   if (!authStore.isAuthenticated) {

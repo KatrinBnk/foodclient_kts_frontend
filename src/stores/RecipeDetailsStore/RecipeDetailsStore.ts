@@ -56,7 +56,7 @@ export default class RecipeDetailsStore extends BaseStore {
       const result = await this.handleApiCall(() => getRecipeById(id));
       if (result) {
         this.setRecipe(result.data);
-        this.setServings( result.data.servings || 1);
+        this.setServings(result.data.servings || 1);
       }
     } finally {
       this._isRequestInProgress = false;

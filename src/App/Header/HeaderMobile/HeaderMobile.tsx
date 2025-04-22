@@ -22,7 +22,7 @@ const HeaderMobile: React.FC = observer(() => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
   useEffect(() => {
-    getMenuItems().then(items => setMenuItems(items));
+    getMenuItems().then((items) => setMenuItems(items));
   }, []);
 
   const toggleMenu = () => {

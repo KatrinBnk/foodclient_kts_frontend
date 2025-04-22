@@ -37,11 +37,7 @@ const RecipeDetailPage: React.FC = () => {
   }
 
   if (recipeDetailsStore.error) {
-    return (
-      <div className={styles['recipe-detail-page__container']}>
-        {'Recipe upload error'}
-      </div>
-    );
+    return <div className={styles['recipe-detail-page__container']}>{'Recipe upload error'}</div>;
   }
 
   const recipe = recipeDetailsStore.recipe!;
