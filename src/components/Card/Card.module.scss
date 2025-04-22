@@ -3,13 +3,13 @@
 .card {
   display: flex;
   flex-direction: column;
-  width: $card-width;
-  height: $card-height;
   background: $card-bg-color;
   border-radius: $border-radius;
   cursor: pointer;
   overflow: hidden;
   position: relative;
+  width: 100%;
+  aspect-ratio: $aspect-ratio-card;
 
   &:hover {
     background-color: rgba($card-bg-color, 0.6);
@@ -19,41 +19,41 @@
     position: absolute;
     top: 14px;
     right: 14px;
-    z-index: 100;
+    z-index: 99;
   }
 
   &__body {
     display: flex;
     flex-direction: column;
-    padding: 24px 14px;
     flex: 1;
+    padding: calc(100% * 24 / 360) calc(100% * 14 / 360);
   }
 
   &__header {
-    width: $card-width;
-    height: $card-width;
     flex-shrink: 0;
+    width: 100%;
+    aspect-ratio: 1;
   }
 
   &__image {
-    width: $card-width;
-    height: $card-width;
     object-fit: cover;
     display: block;
+    width: 100%;
+    aspect-ratio: 1;
   }
 
   &__frame {
     display: flex;
     flex-direction: column;
-    gap: 6px;
     margin-bottom: auto;
+    gap: calc(100% * 6 / 360);
   }
 
   &__footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24px;
+    margin-top: calc(100% * 24 / 360);
   }
 
   &__content-wrapper {

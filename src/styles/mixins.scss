@@ -1,0 +1,22 @@
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin lessThanDesktop {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin lessThanTablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lessThanPhone {
+  @media (max-width: 480px) {
+    @content;
+  }
+}

@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .pagination {
   display: flex;
@@ -7,6 +8,12 @@
   gap: 8px;
   margin-top: 48px;
   margin-bottom: 48px;
+
+  @include lessThanTablet {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    gap: 4px;
+  }
 
   &__button {
     display: flex;
@@ -19,6 +26,11 @@
     cursor: pointer;
     transition: opacity 0.2s ease;
 
+    @include lessThanTablet {
+      width: 24px;
+      height: 24px;
+    }
+
     &:hover:not(:disabled) {
       opacity: 0.7;
     }
@@ -29,15 +41,17 @@
     }
   }
 
-  // Стили для иконки
   &__icon {
     &--prev,
     &--next {
-      width: 32px;
-      height: 32px;
+      @include square(32px);
       fill: $secondary-color;
       transition: transform 0.2s ease;
       transform-origin: center;
+
+      @include lessThanTablet {
+        @include square(24px);
+      }
     }
 
     &--prev {
@@ -52,6 +66,10 @@
     display: flex;
     align-items: center;
     gap: 8px;
+
+    @include lessThanTablet {
+      gap: 4px;
+    }
   }
 
   &__page {
@@ -69,11 +87,17 @@
     line-height: 22px;
     letter-spacing: 0;
     padding: 10px 14px;
-
     color: $text-primary-color;
     transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
+            background-color 0.2s ease,
+            color 0.2s ease;
+
+    @include lessThanTablet {
+      width: 24px;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 6px 8px;
+    }
 
     &:hover {
       color: $text-accent-color;
@@ -94,9 +118,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    @include square(32px);
     font-size: 18px;
     color: #2f2f2f;
+
+    @include lessThanTablet {
+      @include square(24px);
+      font-size: 16px;
+    }
   }
 }

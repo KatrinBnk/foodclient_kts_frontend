@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { apiEndpoints } from '@configs/api';
-import { ICaloriesRange, ITotalTimeRange } from '@stores/RecipeStore/interfaces';
+import { IRange } from '@stores/RecipeStore/interfaces';
 
 interface GetRecipesParams {
   page?: number;
@@ -9,8 +9,8 @@ interface GetRecipesParams {
   query?: string;
   categories?: number[];
   vegetarian?: boolean;
-  calories?: ICaloriesRange;
-  totalTime?: ITotalTimeRange;
+  calories?: IRange;
+  totalTime?: IRange;
 }
 
 export const getRecipes = async (params: GetRecipesParams = {}) => {

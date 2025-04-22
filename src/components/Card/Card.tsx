@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Text from '../Text';
 import styles from './Card.module.scss';
+import { useMediaQuery } from '@utils/useMediaQuery';
 
 export type CardProps = {
   /** Дополнительный classname */
@@ -35,6 +36,8 @@ const Card: React.FC<CardProps> = ({
   actionSlot,
   imageSlot,
 }) => {
+  const isMobile = useMediaQuery('(max-width: 480px)');
+  const isTablet = useMediaQuery('(max-width: 1024px)');
   const cardClass = classNames(styles['card'], className);
 
   return (
@@ -48,7 +51,7 @@ const Card: React.FC<CardProps> = ({
           {captionSlot && (
             <Text
               className={styles['card__caption']}
-              view="p-14"
+              view={isMobile ? 'p-14' : 'p-16'}
               weight="medium"
               color="secondary"
               maxLines={1}
@@ -58,7 +61,7 @@ const Card: React.FC<CardProps> = ({
           )}
           <Text
             className={styles['card__title']}
-            view="p-20"
+            view={isMobile ? 'p-16' : isTablet ? 'p-18' : 'p-20'}
             weight="bold"
             color="primary"
             maxLines={1}
@@ -67,10 +70,10 @@ const Card: React.FC<CardProps> = ({
           </Text>
           <Text
             className={styles['card__subtitle']}
-            view="p-16"
+            view={isMobile ? 'p-14' : 'p-16'}
             weight="normal"
             color="secondary"
-            maxLines={3}
+            maxLines={isMobile ? 2 : isTablet ? 2 : 3}
           >
             {subtitle}
           </Text>
@@ -79,7 +82,12 @@ const Card: React.FC<CardProps> = ({
           <div className={styles['card__footer']}>
             {contentSlot && (
               <div className={styles['card__content-wrapper']}>
-                <Text view="p-20" weight="bold" color="accent" className={styles['card__content']}>
+                <Text
+                  view={isMobile ? 'p-16' : 'p-20'}
+                  weight="bold"
+                  color="accent"
+                  className={styles['card__content']}
+                >
                   {contentSlot}
                 </Text>
               </div>

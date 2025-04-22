@@ -1,19 +1,40 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .directions {
   &__title {
     margin-bottom: 24px;
+
+    @include lessThanTablet {
+      margin-bottom: 16px;
+    }
+
+    @include lessThanPhone {
+      margin-bottom: 12px;
+    }
   }
 
   &__list {
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    @include lessThanTablet {
+      gap: 12px;
+    }
+
+    @include lessThanPhone {
+      gap: 8px;
+    }
   }
 
   &__step {
     display: flex;
     flex-direction: column;
     gap: 4px;
+
+    @include lessThanPhone {
+      gap: 2px;
+    }
   }
 }

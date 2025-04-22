@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .food-info {
   display: flex;
@@ -7,11 +8,36 @@
   gap: 166px;
   height: 298px;
 
+  @include lessThanDesktop {
+    gap: 80px;
+    height: 250px;
+  }
+
+  @include lessThanTablet {
+    flex-direction: column;
+    gap: 32px;
+    height: auto;
+  }
+
   img {
     max-width: 448px;
     height: 298px;
     border-radius: $border-radius;
     object-fit: cover;
+
+    @include lessThanDesktop {
+      max-width: 350px;
+      height: 250px;
+    }
+
+    @include lessThanTablet {
+      max-width: 100%;
+      height: 200px;
+    }
+
+    @include lessThanPhone {
+      height: 180px;
+    }
   }
 }
 
@@ -21,6 +47,21 @@
   grid-auto-rows: min-content;
   gap: 50px 100px;
   align-items: start;
+
+  @include lessThanDesktop {
+    gap: 40px 60px;
+  }
+
+  @include lessThanTablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    width: 100%;
+  }
+
+  @include lessThanPhone {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .food-info__item {
@@ -29,6 +70,10 @@
   gap: 8px;
   align-items: center;
   text-align: center;
+
+  @include lessThanPhone {
+    gap: 4px;
+  }
 
   &[style*='grid-column: 1'] {
     justify-self: start;

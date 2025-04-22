@@ -1,8 +1,19 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .summary {
   background: $summary-bg;
   padding: 36px;
   border-radius: $border-radius;
   line-height: 20px;
+
+  @include lessThanTablet {
+    padding: 24px;
+    line-height: 18px;
+  }
+
+  @include lessThanPhone {
+    padding: 16px;
+    line-height: 16px;
+  }
 }

@@ -1,3 +1,5 @@
+@use '@styles/mixins' as *;
+
 .favorites {
   width: 100%;
   max-width: 1240px;
@@ -6,19 +8,39 @@
   display: flex;
   flex-direction: column;
   min-height: 80vh;
+  padding: 0 10px;
 }
 
 .title {
   margin-top: 50px;
   text-align: center;
+
+  @include lessThanTablet {
+    margin-top: 32px;
+  }
 }
 
 .grid {
-  max-width: 1240px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 64px 80px;
-  width: 100%;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px auto;
+
+  @include lessThanDesktop{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 40px;
+  }
+
+  @include lessThanTablet{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 32px;
+    margin: 32px auto;
+  }
+
+  @include lessThanPhone{
+    grid-template-columns: 1fr;
+    gap: 16px 20px;
+    margin: 24px auto;
+  }
 }

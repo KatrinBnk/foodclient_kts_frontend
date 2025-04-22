@@ -1,16 +1,38 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .recipe-detail-page {
   max-width: 1240px;
   padding: 0 20px;
   width: 100%;
-  margin: 49px auto 0;
+  margin: 49px auto;
+  box-sizing: border-box;
+
+  @include lessThanTablet {
+    padding: 0 16px;
+    margin: 32px auto;
+  }
+
+  @include lessThanPhone {
+    padding: 0 12px;
+    margin: 24px auto;
+  }
 
   &__main {
     display: inline-flex;
     flex-direction: column;
     margin-top: 37px;
     gap: 48px;
+
+    @include lessThanTablet {
+      margin-top: 24px;
+      gap: 32px;
+    }
+
+    @include lessThanPhone {
+      margin-top: 16px;
+      gap: 24px;
+    }
   }
 
   &__container {
@@ -19,5 +41,13 @@
     align-items: center;
     width: 100%;
     padding: 64px 0;
+
+    @include lessThanTablet {
+      padding: 48px 0;
+    }
+
+    @include lessThanPhone {
+      padding: 32px 0;
+    }
   }
 }

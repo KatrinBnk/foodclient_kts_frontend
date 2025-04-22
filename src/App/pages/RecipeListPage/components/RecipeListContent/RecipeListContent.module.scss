@@ -1,13 +1,21 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .recipe-list-content {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1260px;
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-height: 80vh;
+  align-items: center;
+  padding: 0 10px;
+
+  @include lessThanDesktop {
+    max-width: calc(100% - 20px);
+    padding: 0 10px;
+  }
 
   &__loading,
   &__error,
@@ -24,5 +32,23 @@
     color: $text-secondary-color;
     text-align: center;
     padding: 20px;
+
+    @include lessThanTablet {
+      font-size: 16px;
+      padding: 16px;
+    }
+
+    @include lessThanPhone {
+      font-size: 14px;
+      padding: 12px;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    margin: 20px 0;
   }
 }

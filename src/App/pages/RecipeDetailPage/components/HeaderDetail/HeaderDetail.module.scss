@@ -1,9 +1,18 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .header-detail {
   display: flex;
   align-items: center;
   gap: 8px;
+
+  @include lessThanTablet {
+    gap: 6px;
+  }
+
+  @include lessThanPhone {
+    gap: 4px;
+  }
 }
 
 .header-detail__back-button {
@@ -11,8 +20,38 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  cursor: pointer;
+  padding: 8px;
+
+  @include lessThanTablet {
+    padding: 6px;
+  }
+
+  @include lessThanPhone {
+    padding: 4px;
+  }
 }
 
 .header-detail__back-button-icon {
   transform: translate(3px, 3px);
+
+  @include lessThanTablet {
+    @include square(28px);
+  }
+
+  @include lessThanPhone {
+    @include square(24px);
+  }
+}
+
+.header-detail__title {
+  @media (max-width: 768px) {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  @include lessThanPhone {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }

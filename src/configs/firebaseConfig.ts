@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 
-//TODO: Вытащить данные в env
 export const firebaseConfig = {
   apiKey: 'AIzaSyA8kEzbrwTlqRrSHIAQNqAQSjczUl77PeQ',
   authDomain: 'foodclient-kts-frontend.firebaseapp.com',

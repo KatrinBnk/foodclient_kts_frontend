@@ -36,8 +36,6 @@ const ProfilePage: React.FC = () => {
         <Text view="title" tag="h1" weight="bold" className={styles.profile__title}>
           My account
         </Text>
-
-        {/*NOTE: профиль без фото? Нужно проверить*/}
         <div className={styles.profile__info}>
           <img
             src={authStore.user.photoURL || '/poster.png'}
