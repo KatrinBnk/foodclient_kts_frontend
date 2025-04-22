@@ -38,7 +38,7 @@ export default class SavedRecipesStore extends BaseStore {
   async loadSavedRecipes(userId: string): Promise<void> {
     if (!userId) return;
 
-    try {
+    await this.handleApiCall(async () => {
       const savedRecipesRef = collection(db, this.savedRecipesCollection);
       const q = query(savedRecipesRef, where('userId', '==', userId));
       const querySnapshot = await getDocs(q);
@@ -52,16 +52,13 @@ export default class SavedRecipesStore extends BaseStore {
       if (recipeIds.length > 0) {
         await this.fetchSavedRecipesDetails();
       }
-    } catch (error) {
-      console.error('Error loading saved recipes:', error);
-    }
+    });
   }
 
   async fetchSavedRecipesDetails(): Promise<void> {
     if (this.loading) return;
 
-    this.loading = true;
-    try {
+    await this.handleApiCall(async () => {
       const recipes = await Promise.all(
         this._savedRecipesIds.map(async (id) => {
           try {
@@ -78,17 +75,13 @@ export default class SavedRecipesStore extends BaseStore {
           (recipe): recipe is BaseRecipe => recipe !== null
         );
       });
-    } finally {
-      runInAction(() => {
-        this.loading = false;
-      });
-    }
+    });
   }
 
   async saveRecipe(documentId: string, userId: string): Promise<void> {
     if (!userId) return;
 
-    try {
+    await this.handleApiCall(async () => {
       const savedRecipeRef = doc(db, this.savedRecipesCollection, `${userId}_${documentId}`);
       await setDoc(savedRecipeRef, {
         userId,
@@ -106,9 +99,7 @@ export default class SavedRecipesStore extends BaseStore {
       runInAction(() => {
         this._savedRecipesDetails = [...this._savedRecipesDetails, response.data];
       });
-    } catch (error) {
-      console.error(`Error saving recipe ${documentId}:`, error);
-    }
+    });
   }
 
   async removeRecipe(documentId: string, userId: string): Promise<void> {
