@@ -31,7 +31,7 @@ const RecipeListContent: React.FC = () => {
         </div>
       )}
 
-      {recipeStore.recipes.length === 0 && (
+      {recipeStore.recipes.length === 0 && !recipeStore.loading && (
         <div className={styles['recipe-list-content__empty']}>No recipes found</div>
       )}
 
