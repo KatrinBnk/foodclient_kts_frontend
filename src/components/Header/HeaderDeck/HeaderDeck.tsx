@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import styles from './HeaderDeck.module.scss';
 import HeartIcon from '@components/Icons/HeartIcon';
 import UserIcon from '@components/Icons/UserIcon';
 import logo from '../logo.svg';
-import { menuItems, MenuItem } from '../config.ts';
+import { getMenuItems, MenuItem } from '../config.ts';
 import Text from '@components/Text';
 import { useStore } from '@stores/hooks';
 import { ROUTES } from '@configs/routes.ts';
@@ -20,6 +20,12 @@ const HeaderDeck: React.FC = observer(() => {
   const { authStore } = useStore();
   const { handleClick, showNoRecipesToast, setShowNoRecipesToast } = useRandomRecipeNavigation();
   const isRecipesActive = location.pathname === '/' || location.pathname.startsWith('/recipe/');
+
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+  useEffect(() => {
+    getMenuItems().then(items => setMenuItems(items));
+  }, []);
 
   return (
     <>

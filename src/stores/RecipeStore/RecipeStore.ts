@@ -1,9 +1,9 @@
-import { makeObservable, observable, action, computed } from 'mobx';
+import { makeObservable, observable, action, computed, reaction } from 'mobx';
 import { BaseStore } from '@stores/BaseStore.ts';
 import { getRecipes } from '@utils/api.ts';
 import { BaseRecipe } from '@types';
 import QueryParamsStore from '@stores/QueryParamsStore';
-import { IPaginationMeta, ITotalTimeRange, ICaloriesRange } from './interfaces.ts';
+import { IPaginationMeta, IRange } from './interfaces.ts';
 
 export default class RecipeStore extends BaseStore {
   searchQuery = '';
@@ -11,14 +11,14 @@ export default class RecipeStore extends BaseStore {
   meta: IPaginationMeta | null = null;
   selectedCategories: number[] = [];
   isVegetarian = false;
-  calories: ICaloriesRange = {};
-  totalTime: ITotalTimeRange = {};
+  calories: IRange = {};
+  totalTime: IRange = {};
 
   private _queryParamsStore: QueryParamsStore;
   private _recipes: BaseRecipe[] = [];
   private _isRequestInProgress: boolean = false;
   private _lastRequestParams: string = '';
-  private _pageSize = 9; //NOTE: это константа и по хорошему ее бы отсюда убарть
+  private _pageSize = 9;
 
   constructor() {
     super();
@@ -51,6 +51,20 @@ export default class RecipeStore extends BaseStore {
       hasPrevPage: computed,
       totalPages: computed,
     });
+
+    reaction(
+      () => ({
+        searchQuery: this.searchQuery,
+        currentPage: this.currentPage,
+        selectedCategories: this.selectedCategories,
+        isVegetarian: this.isVegetarian,
+        calories: this.calories,
+        totalTime: this.totalTime,
+      }),
+      () => {
+        this.fetchRecipes();
+      }
+    );
   }
 
   get recipes(): BaseRecipe[] {
@@ -71,72 +85,31 @@ export default class RecipeStore extends BaseStore {
 
   setSearchQuery(query: string): void {
     this.searchQuery = query;
-    this.currentPage = 1;
-    this._queryParamsStore.setParam('search', query);
-    this._queryParamsStore.setParam('page', '1');
-    this.fetchRecipes();
+    this.updateParam('search', query);
   }
 
   setSelectedCategories(categories: number[]): void {
     this.selectedCategories = categories;
-    this.currentPage = 1;
-    if (categories.length > 0) {
-      this._queryParamsStore.setParam('categories', categories.join(','));
-    } else {
-      this._queryParamsStore.removeParam('categories');
-    }
-    this._queryParamsStore.setParam('page', '1');
-    this.fetchRecipes();
+    const value = categories.length ? categories.join(',') : undefined;
+    this.updateParam('categories', value);
   }
 
   setIsVegetarian(isVegetarian: boolean): void {
     this.isVegetarian = isVegetarian;
-    this.currentPage = 1;
-    if (isVegetarian) {
-      this._queryParamsStore.setParam('vegetarian', 'true');
-    } else {
-      this._queryParamsStore.removeParam('vegetarian');
-    }
-    this._queryParamsStore.setParam('page', '1');
-    this.fetchRecipes();
+    const value = isVegetarian ? 'true' : undefined;
+    this.updateParam('vegetarian', value);
   }
 
-  setCalories(calories: ICaloriesRange): void {
+  setCalories(calories: IRange): void {
     this.calories = calories;
-    this.currentPage = 1;
-    if (calories.min !== undefined || calories.max !== undefined) {
-      const params = [];
-      if (calories.min !== undefined) {
-        params.push(`min=${calories.min}`);
-      }
-      if (calories.max !== undefined) {
-        params.push(`max=${calories.max}`);
-      }
-      this._queryParamsStore.setParam('calories', params.join('&'));
-    } else {
-      this._queryParamsStore.removeParam('calories');
-    }
-    this._queryParamsStore.setParam('page', '1');
-    this.fetchRecipes();
+    const value = this.formatRangeParam(calories);
+    this.updateParam('calories', value);
   }
 
-  setTotalTime(totalTime: ITotalTimeRange): void {
+  setTotalTime(totalTime: IRange): void {
     this.totalTime = totalTime;
-    this.currentPage = 1;
-    if (totalTime.min !== undefined || totalTime.max !== undefined) {
-      const params = [];
-      if (totalTime.min !== undefined) {
-        params.push(`min=${totalTime.min}`);
-      }
-      if (totalTime.max !== undefined) {
-        params.push(`max=${totalTime.max}`);
-      }
-      this._queryParamsStore.setParam('totalTime', params.join('&'));
-    } else {
-      this._queryParamsStore.removeParam('totalTime');
-    }
-    this._queryParamsStore.setParam('page', '1');
-    this.fetchRecipes();
+    const value = this.formatRangeParam(totalTime);
+    this.updateParam('totalTime', value);
   }
 
   async setCurrentPage(page: number): Promise<void> {
@@ -146,7 +119,6 @@ export default class RecipeStore extends BaseStore {
 
     this.currentPage = page;
     this._queryParamsStore.setParam('page', page.toString());
-    await this.fetchRecipes();
   }
 
   async fetchRecipes(): Promise<void> {
@@ -213,29 +185,31 @@ export default class RecipeStore extends BaseStore {
     const totalTimeFromUrl = this._queryParamsStore.getParam('totalTime');
 
     if (pageFromUrl) {
-      this.currentPage = parseInt(pageFromUrl, 10);
+      this.setCurrentPage(parseInt(pageFromUrl, 10));
     }
     if (searchFromUrl) {
-      this.searchQuery = searchFromUrl;
+      this.setSearchQuery(searchFromUrl);
     }
     if (categoriesFromUrl) {
-      this.selectedCategories = categoriesFromUrl.split(',').map(Number);
+      this.setSelectedCategories(categoriesFromUrl.split(',').map(Number));
     }
     if (vegetarianFromUrl) {
-      this.isVegetarian = vegetarianFromUrl === 'true';
+      this.setIsVegetarian(vegetarianFromUrl === 'true');
     }
-    this.calories = this.parseCaloriesFromUrl(caloriesFromUrl);
-    this.totalTime = this.parseTotalTimeFromUrl(totalTimeFromUrl);
-
-    this.fetchRecipes();
+    if (caloriesFromUrl) {
+      this.setCalories(this.parseRangeFromUrl(caloriesFromUrl));
+    }
+    if (totalTimeFromUrl) {
+      this.setTotalTime(this.parseRangeFromUrl(totalTimeFromUrl));
+    }
   }
 
-  private parseCaloriesFromUrl(caloriesFromUrl: string | null): ICaloriesRange {
-    if (!caloriesFromUrl) {
+  private parseRangeFromUrl(rangeFromUrl: string | null): IRange {
+    if (!rangeFromUrl) {
       return {};
     }
 
-    const params = new URLSearchParams(caloriesFromUrl);
+    const params = new URLSearchParams(rangeFromUrl);
     const min = params.get('min');
     const max = params.get('max');
 
@@ -245,18 +219,21 @@ export default class RecipeStore extends BaseStore {
     };
   }
 
-  private parseTotalTimeFromUrl(totalTimeFromUrl: string | null): ITotalTimeRange {
-    if (!totalTimeFromUrl) {
-      return {};
+  private updateParam(paramName: string, value: string | undefined, extra?: () => void): void {
+    this.currentPage = 1;
+    if (value && value !== '') {
+      this._queryParamsStore.setParam(paramName, value);
+    } else {
+      this._queryParamsStore.removeParam(paramName);
     }
+    extra?.();
+    this._queryParamsStore.setParam('page', '1');
+  }
 
-    const params = new URLSearchParams(totalTimeFromUrl);
-    const min = params.get('min');
-    const max = params.get('max');
-
-    return {
-      min: min ? parseInt(min, 10) : undefined,
-      max: max ? parseInt(max, 10) : undefined,
-    };
+  private formatRangeParam(range: IRange): string | undefined {
+    const params = [];
+    if (range.min !== undefined) params.push(`min=${range.min}`);
+    if (range.max !== undefined) params.push(`max=${range.max}`);
+    return params.length ? params.join('&') : undefined;
   }
 }
