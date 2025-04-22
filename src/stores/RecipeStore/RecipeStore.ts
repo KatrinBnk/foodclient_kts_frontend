@@ -121,6 +121,14 @@ export default class RecipeStore extends BaseStore {
     this._queryParamsStore.setParam('page', page.toString());
   }
 
+  resetFilters(): void {
+    this.setSearchQuery('');
+    this.setIsVegetarian(false);
+    this.setCalories({});
+    this.setTotalTime({});
+    this.setCurrentPage(1);
+  }
+
   async fetchRecipes(): Promise<void> {
     const currentParams = this.getRequestParamsKey();
 
