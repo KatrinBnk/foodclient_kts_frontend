@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .header {
   display: flex;
@@ -7,6 +8,10 @@
   padding: 14px 100px;
   max-height: 64px;
   background-color: $bg-primary-color;
+
+  @include lessThanDesktop {
+    padding: 14px 24px;
+  }
 }
 
 .header__logo {
@@ -40,6 +45,11 @@
     line-height: 20px;
     letter-spacing: 0;
     color: $text-primary-color;
+
+    @include lessThanTablet {
+      font-size: 14px;
+      line-height: 18px;
+    }
   }
 
   &-link--active {
@@ -48,6 +58,11 @@
     line-height: 20px;
     letter-spacing: 0;
     color: $text-accent-color;
+
+    @include lessThanTablet {
+      font-size: 14px;
+      line-height: 18px;
+    }
   }
 }
 
