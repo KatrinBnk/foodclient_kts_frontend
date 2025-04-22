@@ -3,7 +3,7 @@
 Проект, выполняемый в рамках курса ["Начинающий React разработчик"](https://metaclass.kts.studio/).
 Тема курсового проекта: Food Strapi.
 
-Ознакомиться с [презентацией](https://www.figma.com/deck/mRlwx9UAAfBsapx7D2z6JJ/Research-Readout?node-id=21-289&t=y16G3YPoxTx2Y1HH-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1). В презентации подробно продемонстрирован проект, далее будет приведено краткое описание реализованных функций. 
+Ознакомиться с [презентацией](https://www.figma.com/deck/mRlwx9UAAfBsapx7D2z6JJ/Research-Readout?node-id=1-354&t=y16G3YPoxTx2Y1HH-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1). В презентации подробно продемонстрирован проект, далее будет приведено краткое описание реализованных функций. 
 
 ## Основные реализованные возможности
 
