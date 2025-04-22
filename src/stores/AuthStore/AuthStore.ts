@@ -11,16 +11,14 @@ import { auth } from '@configs/firebaseConfig';
 
 export default class AuthStore extends BaseStore {
   private _user: User | null = null;
-  private _isLoading: boolean = true;
   private readonly provider: GoogleAuthProvider;
 
   constructor() {
     super();
     this.provider = new GoogleAuthProvider();
 
-    makeObservable<this, '_user' | '_isLoading'>(this, {
+    makeObservable<this, '_user'>(this, {
       _user: observable,
-      _isLoading: observable,
       isAuthenticated: computed,
       signInWithGoogle: action,
       signOutUser: action,
@@ -33,7 +31,7 @@ export default class AuthStore extends BaseStore {
     onAuthStateChanged(auth, (user) => {
       runInAction(() => {
         this._user = user;
-        this._isLoading = false;
+        this.loading = false;
       });
     });
   }
@@ -43,7 +41,7 @@ export default class AuthStore extends BaseStore {
   }
 
   get isLoading(): boolean {
-    return this._isLoading;
+    return this.loading;
   }
 
   get isAuthenticated(): boolean {
@@ -51,20 +49,14 @@ export default class AuthStore extends BaseStore {
   }
 
   async signInWithGoogle(): Promise<void> {
-    try {
+    await this.handleApiCall(async () => {
       await signInWithPopup(auth, this.provider);
-    } catch (error) {
-      console.error('Error signing in with Google:', error);
-      throw error;
-    }
+    });
   }
 
   async signOutUser(): Promise<void> {
-    try {
+    await this.handleApiCall(async () => {
       await signOut(auth);
-    } catch (error) {
-      console.error('Error signing out:', error);
-      throw error;
-    }
+    });
   }
 }
