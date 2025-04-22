@@ -220,14 +220,12 @@ export default class RecipeStore extends BaseStore {
   }
 
   private updateParam(paramName: string, value: string | undefined, extra?: () => void): void {
-    this.currentPage = 1;
     if (value && value !== '') {
       this._queryParamsStore.setParam(paramName, value);
     } else {
       this._queryParamsStore.removeParam(paramName);
     }
     extra?.();
-    this._queryParamsStore.setParam('page', '1');
   }
 
   private formatRangeParam(range: IRange): string | undefined {
