@@ -17,22 +17,25 @@ const RecipeListContent: React.FC = () => {
   return (
     <div className={styles['recipe-list-content']}>
       <FilterBar />
-      <RecipeList recipes={recipeStore.recipes} />
-
-      {recipeStore.loading && (
+      
+      {recipeStore.loading ? (
         <div className={styles['recipe-list-content__loading']}>
           <Loader size="m" />
         </div>
-      )}
+      ) : (
+        <>
+          <RecipeList recipes={recipeStore.recipes} />
+          
+          {recipeStore.error && (
+            <div className={styles['recipe-list-content__error']}>
+              An error occurred when uploading recipes
+            </div>
+          )}
 
-      {recipeStore.error && (
-        <div className={styles['recipe-list-content__error']}>
-          An error occurred when uploading recipes
-        </div>
-      )}
-
-      {recipeStore.recipes.length === 0 && !recipeStore.loading && (
-        <div className={styles['recipe-list-content__empty']}>No recipes found</div>
+          {recipeStore.recipes.length === 0 && (
+            <div className={styles['recipe-list-content__empty']}>No recipes found</div>
+          )}
+        </>
       )}
 
       {recipeStore.meta && (

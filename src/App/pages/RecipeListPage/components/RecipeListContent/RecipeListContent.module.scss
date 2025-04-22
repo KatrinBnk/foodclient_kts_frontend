@@ -43,4 +43,12 @@
       padding: 12px;
     }
   }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    margin: 20px 0;
+  }
 }
