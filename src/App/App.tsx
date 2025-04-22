@@ -1,6 +1,6 @@
 import { Routes, Route, HashRouter } from 'react-router-dom';
 import StoreProvider from '@stores/context';
-import MainLayout from '@components/Layouts/MainLayout';
+import MainLayout from '@/App/Layouts/MainLayout';
 import { routes } from './routes';
 
 const App = () => {
