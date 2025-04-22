@@ -1,3 +1,5 @@
+@use '@styles/mixins' as *;
+
 .recipe-list {
   width: 100%;
   display: grid;
@@ -5,17 +7,17 @@
   gap: 64px 80px;
   margin: 0 auto;
 
-  @media (max-width: 1024px) {
+  @include lessThanDesktop {
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 40px;
   }
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px 32px;
   }
 
-  @media (max-width: 480px) {
+  @include lessThanPhone {
     grid-template-columns: 1fr;
     gap: 16px 20px;
   }

@@ -1,3 +1,5 @@
+@use '@styles/mixins' as *;
+
 .favorites {
   width: 100%;
   max-width: 1240px;
@@ -13,7 +15,7 @@
   margin-top: 50px;
   text-align: center;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     margin-top: 32px;
   }
 }
@@ -25,18 +27,18 @@
   gap: 64px 80px;
   margin: 50px auto;
 
-  @media (max-width: 1024px) {
+  @include lessThanDesktop{
     grid-template-columns: repeat(2, 1fr);
     gap: 32px 40px;
   }
 
-  @media (max-width: 768px) {
+  @include lessThanTablet{
     grid-template-columns: repeat(2, 1fr);
     gap: 24px 32px;
     margin: 32px auto;
   }
 
-  @media (max-width: 480px) {
+  @include lessThanPhone{
     grid-template-columns: 1fr;
     gap: 16px 20px;
     margin: 24px auto;

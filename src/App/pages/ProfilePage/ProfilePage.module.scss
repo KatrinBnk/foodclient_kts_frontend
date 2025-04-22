@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .profile {
   width: 100%;
@@ -10,7 +11,7 @@
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     padding: 20px 10px;
     min-height: 80vh;
   }
@@ -23,7 +24,7 @@
     padding: 32px;
     box-shadow: 0 4px 20px rgba($text-accent-color, 0.2);
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       padding: 24px 16px;
     }
   }
@@ -32,7 +33,7 @@
     margin-bottom: 32px;
     text-align: center;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       margin-bottom: 24px;
     }
   }
@@ -44,7 +45,7 @@
     margin-bottom: 32px;
     padding: 24px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       flex-direction: column;
       text-align: center;
       gap: 16px;
@@ -54,14 +55,12 @@
   }
 
   &__avatar {
-    width: 100px;
-    height: 100px;
+    @include square(100px);
     border-radius: 50%;
     object-fit: cover;
 
-    @media (max-width: 768px) {
-      width: 80px;
-      height: 80px;
+    @include lessThanTablet {
+      @include square(80px);
     }
   }
 
@@ -70,7 +69,7 @@
     flex-direction: column;
     gap: 8px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       align-items: center;
     }
   }
@@ -81,7 +80,7 @@
     align-items: center;
     gap: 16px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       gap: 12px;
     }
   }
@@ -89,7 +88,7 @@
   &__button {
     width: 50%;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       width: 100%;
     }
   }

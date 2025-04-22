@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .filter-bar {
   width: 100%;
@@ -7,12 +8,12 @@
   gap: 16px;
   margin: 48px 0 32px;
 
-  @media (max-width: 1024px) {
+  @include lessThanDesktop {
     margin: 32px 0 24px;
     gap: 12px;
   }
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     margin: 24px 0 16px;
     gap: 8px;
   }
@@ -20,11 +21,11 @@
   &__categories {
     width: calc(100% / 5 - 16px);
 
-    @media (max-width: 1024px) {
+    @include lessThanDesktop {
       width: calc(100% / 2 - 16px);
     }
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       width: 100%;
     }
 
@@ -45,12 +46,12 @@
     align-items: center;
     width: 100%;
 
-    @media (max-width: 1024px) {
+    @include lessThanDesktop {
       flex-wrap: wrap;
       gap: 12px;
     }
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
@@ -69,7 +70,7 @@
     cursor: pointer;
     width: 100%;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       gap: 6px;
     }
   }
@@ -77,11 +78,11 @@
   &__random {
     width: calc(100% / 5 - 16px);
 
-    @media (max-width: 1024px) {
+    @include lessThanDesktop {
       width: calc(100% / 2 - 16px);
     }
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       width: 100%;
     }
   }
@@ -91,11 +92,11 @@
 .filter-bar__total-time {
   width: calc(100% / 5 - 16px);
 
-  @media (max-width: 1024px) {
+  @include lessThanDesktop {
     width: calc(100% / 2 - 16px);
   }
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     width: 100%;
   }
 }

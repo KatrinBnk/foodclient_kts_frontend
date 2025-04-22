@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .recipe-detail-page {
   max-width: 1240px;
@@ -7,12 +8,12 @@
   margin: 49px auto;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     padding: 0 16px;
     margin: 32px auto;
   }
 
-  @media (max-width: 480px) {
+  @include lessThanPhone {
     padding: 0 12px;
     margin: 24px auto;
   }
@@ -23,12 +24,12 @@
     margin-top: 37px;
     gap: 48px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       margin-top: 24px;
       gap: 32px;
     }
 
-    @media (max-width: 480px) {
+    @include lessThanPhone {
       margin-top: 16px;
       gap: 24px;
     }
@@ -41,11 +42,11 @@
     width: 100%;
     padding: 64px 0;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       padding: 48px 0;
     }
 
-    @media (max-width: 480px) {
+    @include lessThanPhone {
       padding: 32px 0;
     }
   }

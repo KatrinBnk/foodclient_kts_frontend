@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .poster {
   position: relative;
@@ -9,15 +10,15 @@
     height: 572px;
     object-fit: cover;
 
-    @media (max-width: 1024px) {
+    @include lessThanDesktop {
       height: 450px;
     }
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       height: 350px;
     }
 
-    @media (max-width: 480px) {
+    @include lessThanPhone {
       height: 250px;
     }
   }
@@ -26,12 +27,12 @@
     text-align: center;
     margin: 36px auto 0;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       margin: 24px auto 0;
       padding: 0 24px;
     }
 
-    @media (max-width: 480px) {
+    @include lessThanPhone {
       margin: 16px auto 0;
       padding: 0 16px;
     }

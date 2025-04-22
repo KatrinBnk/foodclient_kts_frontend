@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .needed-products-container{
   display:flex;
@@ -12,11 +13,11 @@
   gap: 48px;
   align-items: start;
 
-  @media (max-width: 1024px) {
+  @include lessThanDesktop {
     gap: 32px;
   }
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     grid-template-columns: 1fr;
     gap: 24px;
   }
@@ -29,7 +30,7 @@
   background: $brand-color;
   position: relative;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     display: none;
   }
 
@@ -52,7 +53,7 @@
   &-title {
     margin-bottom: 24px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       margin-bottom: 16px;
     }
   }
@@ -62,7 +63,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       grid-template-columns: 1fr;
       gap: 16px;
     }
@@ -73,7 +74,7 @@
     align-items: center;
     gap: 12px;
 
-    @media (max-width: 480px) {
+    @include lessThanPhone {
       gap: 8px;
     }
   }
@@ -104,11 +105,11 @@
   align-items: center;
   gap: 12px;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     gap: 10px;
   }
 
-  @media (max-width: 480px) {
+  @include lessThanPhone {
     gap: 8px;
   }
 }
@@ -116,7 +117,7 @@
 .servings-input {
   width: 60px;
 
-  @media (max-width: 480px) {
+  @include lessThanPhone {
     width: 50px;
   }
 

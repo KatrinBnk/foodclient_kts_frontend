@@ -1,4 +1,5 @@
 @use '@styles/variables' as *;
+@use '@styles/mixins' as *;
 
 .pagination {
   display: flex;
@@ -8,7 +9,7 @@
   margin-top: 48px;
   margin-bottom: 48px;
 
-  @media (max-width: 768px) {
+  @include lessThanTablet {
     margin-top: 32px;
     margin-bottom: 32px;
     gap: 4px;
@@ -25,7 +26,7 @@
     cursor: pointer;
     transition: opacity 0.2s ease;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       width: 24px;
       height: 24px;
     }
@@ -43,15 +44,13 @@
   &__icon {
     &--prev,
     &--next {
-      width: 32px;
-      height: 32px;
+      @include square(32px);
       fill: $secondary-color;
       transition: transform 0.2s ease;
       transform-origin: center;
 
-      @media (max-width: 768px) {
-        width: 24px;
-        height: 24px;
+      @include lessThanTablet {
+        @include square(24px);
       }
     }
 
@@ -68,7 +67,7 @@
     align-items: center;
     gap: 8px;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       gap: 4px;
     }
   }
@@ -93,7 +92,7 @@
             background-color 0.2s ease,
             color 0.2s ease;
 
-    @media (max-width: 768px) {
+    @include lessThanTablet {
       width: 24px;
       font-size: 16px;
       line-height: 20px;
@@ -119,14 +118,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    @include square(32px);
     font-size: 18px;
     color: #2f2f2f;
 
-    @media (max-width: 768px) {
-      width: 24px;
-      height: 24px;
+    @include lessThanTablet {
+      @include square(24px);
       font-size: 16px;
     }
   }
