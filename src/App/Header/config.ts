@@ -48,6 +48,10 @@ export async function getMenuItems(): Promise<MenuItem[]> {
       title: 'Daily Recipe',
     },
     {
+      link: ROUTES.MEAL_CATEGORIES,
+      title: 'Meal Categories',
+    },
+    {
       link: ROUTES.FAVORITES,
       title: 'Favorites',
       isProtected: true,

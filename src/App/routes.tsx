@@ -4,6 +4,7 @@ import RecipeDetailPage from '@pages/RecipeDetailPage';
 import FavoritesPage from '@pages/FavoritesPage';
 import AuthPage from '@pages/AuthPage';
 import ProfilePage from '@pages/ProfilePage';
+import MealCategoriesPage from '@pages/MealCategoriesPage';
 import ProtectedRoute from './ProtectedRoute.tsx';
 
 export const routes = [
@@ -34,5 +35,9 @@ export const routes = [
         <ProfilePage />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: ROUTES.MEAL_CATEGORIES,
+    element: <MealCategoriesPage />,
   },
 ];

@@ -6,4 +6,5 @@ export const ROUTES = {
   RANDOM_RECIPE: '/random-recipe/:documentId',
   AUTH: '/auth',
   PROFILE: '/profile',
+  MEAL_CATEGORIES: '/meal-categories',
 };
