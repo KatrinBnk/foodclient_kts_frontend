@@ -12,7 +12,7 @@ export const FavoritesPage = observer(() => {
 
   useEffect(() => {
     if (authStore.user?.uid) {
-      savedRecipesStore.loadSavedRecipes(authStore.user.uid);
+      savedRecipesStore.loadSavedRecipes(authStore.user.uid, true);
     }
   }, [savedRecipesStore, authStore.user?.uid]);
 

@@ -8,7 +8,13 @@ import styles from './RecipeListContent.module.scss';
 import Loader from '@components/Loader';
 
 const RecipeListContent: React.FC = () => {
-  const { recipeStore } = useStore();
+  const { recipeStore, savedRecipesStore, authStore } = useStore();
+
+  useEffect(() => {
+    if (authStore.user?.uid) {
+      savedRecipesStore.loadSavedRecipes(authStore.user.uid);
+    }
+  }, [authStore.user?.uid, savedRecipesStore]);
 
   useEffect(() => {
     recipeStore.fetchRecipes();

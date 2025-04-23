@@ -35,8 +35,9 @@ export default class SavedRecipesStore extends BaseStore {
     return this._savedRecipesDetails;
   }
 
-  async loadSavedRecipes(userId: string): Promise<void> {
+  async loadSavedRecipes(userId: string, details = false): Promise<void> {
     if (!userId) return;
+    if (this.loading) return;
 
     await this.handleApiCall(async () => {
       const savedRecipesRef = collection(db, this.savedRecipesCollection);
@@ -48,16 +49,13 @@ export default class SavedRecipesStore extends BaseStore {
       runInAction(() => {
         this._savedRecipesIds = recipeIds;
       });
-
-      if (recipeIds.length > 0) {
+      if (recipeIds.length > 0 && details) {
         await this.fetchSavedRecipesDetails();
       }
     });
   }
 
   async fetchSavedRecipesDetails(): Promise<void> {
-    if (this.loading) return;
-
     await this.handleApiCall(async () => {
       const recipes = await Promise.all(
         this._savedRecipesIds.map(async (id) => {
