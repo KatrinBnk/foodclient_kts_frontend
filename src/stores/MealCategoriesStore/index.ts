@@ -1,2 +1,2 @@
 export { default } from './MealCategoriesStore';
-export * from './MealCategoriesStore';
+export * from './interfaces';

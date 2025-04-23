@@ -7,7 +7,7 @@ import styles from './MealCategoriesPage.module.scss';
 import { Loader } from '@components/Loader';
 
 const MealCategoriesPage: React.FC = () => {
-  const { mealCategoriesStore, recipeStore } = useStore();
+  const { mealCategoriesStore} = useStore();
 
   useEffect(() => {
     mealCategoriesStore.fetchCategories();
@@ -44,11 +44,6 @@ const MealCategoriesPage: React.FC = () => {
                 <span className={styles['category-card__recipes']}>No recipes in category</span>
               )
             }
-            onClick={() => {
-              recipeStore.resetFilters();
-              recipeStore.setSelectedCategories([category.id]);
-              window.location.replace(`#/?page=1&categories=${category.id}`);
-            }}
           />
         ))}
       </div>

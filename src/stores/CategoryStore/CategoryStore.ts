@@ -48,6 +48,7 @@ export default class CategoryStore extends BaseStore {
 
   async initialize(): Promise<void> {
     if (this._initialized) return;
+    if (this.loading) return;
     await this.fetchCategories();
     this._initialized = true;
   }

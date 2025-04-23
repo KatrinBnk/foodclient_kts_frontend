@@ -1,18 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
 import { BaseStore } from '@stores/BaseStore';
 import { getCategories } from '@utils/api';
-import { BaseRecipe, Image } from '@types';
-
-export interface IMealCategory {
-  id: number;
-  documentId: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  image: Image;
-  recipes: BaseRecipe[];
-}
+import { IMealCategory } from '@stores/MealCategoriesStore/interfaces.ts';
 
 export default class MealCategoriesStore extends BaseStore {
   categories: IMealCategory[] = [];
